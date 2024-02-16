@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comptecourant index{% endblock %}
+
+{% block body %}
+    <h1>Comptecourant index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Dateouv</th>
+                <th>Rib</th>
+                <th>Solde</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comptecourant in comptecourants %}
+            <tr>
+                <td>{{ comptecourant.id }}</td>
+                <td>{{ comptecourant.dateouv ? comptecourant.dateouv|date('Y-m-d') : '' }}</td>
+                <td>{{ comptecourant.Rib }}</td>
+                <td>{{ comptecourant.solde }}</td>
+                <td>
+                    <a href="{{ path('app_comptecourant_show', {'id': comptecourant.id}) }}">show</a>
+                    <a href="{{ path('app_comptecourant_edit', {'id': comptecourant.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_comptecourant_new') }}">Create new</a>
+{% endblock %}

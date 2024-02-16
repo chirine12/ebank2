@@ -1,3 +1,20 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+user_interface:
+    path: /userinterface
+    controller: App\Controller\UserInterfaceController::index
+admininterface:
+    path: /admininterface
+    controller: App\Controller\AdminInterfaceController::index
+    # Add any additional configuration as needed
+    # Example security.yaml snippet
+# config/packages/security.yaml
+# app/config/routes.yaml
+# app/config/routes.yaml
+images:
+    path: /images
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+        path: '%kernel.project_dir%/public/images'
+        permanent: true

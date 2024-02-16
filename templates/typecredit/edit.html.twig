@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Typecredit{% endblock %}
+
+{% block body %}
+    <h1>Edit Typecredit</h1>
+
+    {{ include('typecredit/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_typecredit_index') }}">back to list</a>
+
+    {{ include('typecredit/_delete_form.html.twig') }}
+{% endblock %}

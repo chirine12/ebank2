@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Comptecourant{% endblock %}
+
+{% block body %}
+    <h1>Edit Comptecourant</h1>
+
+    {{ include('comptecourant/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_comptecourant_index') }}">back to list</a>
+
+    {{ include('comptecourant/_delete_form.html.twig') }}
+{% endblock %}

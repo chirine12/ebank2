@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Typetaux{% endblock %}
+
+{% block body %}
+    <h1>Create new Typetaux</h1>
+
+    {{ include('typetaux/_form.html.twig') }}
+
+    <a href="{{ path('app_typetaux_index') }}">back to list</a>
+{% endblock %}
