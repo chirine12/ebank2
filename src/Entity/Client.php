@@ -50,16 +50,16 @@ class Client
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\OneToMany(targetEntity: compteep::class, mappedBy: 'client')]
+    #[ORM\OneToMany(targetEntity: Compteep::class, mappedBy: 'client')]
     private Collection $compteep;
 
-    #[ORM\OneToMany(targetEntity: virement::class, mappedBy: 'client')]
+    #[ORM\OneToMany(targetEntity: Virement::class, mappedBy: 'client')]
     private Collection $virement;
 
-    #[ORM\OneToMany(targetEntity: assurance::class, mappedBy: 'client')]
+    #[ORM\OneToMany(targetEntity: Assurance::class, mappedBy: 'client')]
     private Collection $assurance;
 
-    #[ORM\OneToMany(targetEntity: credit::class, mappedBy: 'client')]
+    #[ORM\OneToMany(targetEntity: Credit::class, mappedBy: 'client')]
     private Collection $credit;
 
     #[ORM\OneToMany(targetEntity: Contrat::class, mappedBy: 'client')]
