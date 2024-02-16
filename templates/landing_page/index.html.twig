@@ -1,0 +1,525 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+
+
+<!-- Mirrored from html-template.spider-themes.net/banca/index-small-bank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Feb 2024 09:01:35 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>E-Bank</title>
+    <link rel="shortcut icon" href="img2/favicon.png" type="image/x-icon">
+
+    <!-- CSS here -->
+<link rel="stylesheet" type="text/css" href="{{ asset('css2/bootstrap.min.css') }}" media="all" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css2/elegant-icons.min.css') }}" media="all" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css2/all.min.css') }}" media="all" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css2/animate.css') }}" media="all" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css2/nice-select.css') }}" media="all" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css2/default.css') }}" media="all" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css2/style.css') }}" media="all" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css2/responsive.css') }}" media="all" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css2/slick.css') }}" media="all" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css2/slick-theme.css') }}" media="all" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css2/nouislider.min.css') }}" media="all" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css2/jquery.fancybox.min.css') }}" media="all" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css2/flatpickr.min.css') }}" media="all" />
+
+
+
+
+
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="ctn-preloader" class="ctn-preloader">
+            <div class="round_spinner">
+                <div class="spinner"></div>
+                <div class="text">
+                    <img src="{{asset('img2/logo/Logo-2.png')}}" alt="">
+                </div>
+            </div>
+            
+          
+        </div>
+    </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-menu header-menu-4" id="sticky">
+            <nav class="navbar navbar-expand-lg ">
+                <div class="container">
+                    <a class="navbar-brand sticky_logo" href="index.html">
+                      <img class="main" src="{{ asset('img2/logo/Logo.png') }}" srcset="{{ asset('img2/logo/Logo@2x.png') }} 2x" alt="logo">
+                      <img class="sticky" src="{{ asset('img2/logo/Logo-2.png') }}" srcset="{{ asset('img2/logo/Logo-2@2x.png') }} 2x" alt="logo">
+
+                    </a>
+                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="menu_toggle">
+                            <span class="hamburger">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </span>
+                            <span class="hamburger-cross">
+                                <span></span>
+                                <span></span>
+                            </span>
+                        </span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav menu ms-auto">
+                            <li class="nav-item dropdown submenu ">
+                                <a href="#" class="nav-link dropdown-toggle active" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acceuil</a>
+                                <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="true"
+                                    data-bs-toggle="dropdown"></i>
+                                
+                            </li>
+                            <li class="nav-item dropdown submenu">
+                                <a class="nav-link dropdown-toggle" href="{{ path('app_loancalculator') }}" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    loan calculator
+                                </a>
+                                <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="false"
+                                    data-bs-toggle="dropdown"></i>
+
+                                
+                            </li>
+                           
+                            
+                        </ul>
+                        <a class="theme-btn theme-btn-rounded-2 theme-btn-alt"
+   href="{{ path('app_login') }}">Se connecter</a>
+
+                        <div class="px-2 js-darkmode-btn" title="Toggle dark mode">
+                            <label for="something" class="tab-btn tab-btns">
+                                <ion-icon name="moon"></ion-icon>
+                            </label>
+                            <label for="something" class="tab-btn">
+                                <ion-icon name="sunny"></ion-icon>
+                            </label>
+                            <label class=" ball" for="something"></label>
+                            <input type="checkbox" name="something" id="something" class="dark_mode_switcher">
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- Header end-->
+
+
+    <main>
+
+        <!-- banner section -->
+        <section class="bank-banner-area">
+            <img class="wave_img" src="{{asset('img2/bank/wave.png')}}" alt="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="bank-banner-content">
+                            <h5 class="wow fadeInUp" data-wow-delay="0.2s">Pour une meilleure gestion de  votre argent</h5>
+                            <h1 class="wow fadeInUp" data-wow-delay="0.3s"> <span
+                                    class="underline-shape">E-Bank</span> est la solution pour vous.</h1>
+                            
+                            <div class="d-flex flex-column flex-sm-row mt-25 subscribe-field wow fadeInUp"
+                                data-wow-delay="0.6s">
+                           
+                               <form action="{{ path('app_register') }}" method="get">
+    <button type="submit" class="input-append theme-btn theme-btn-lg ms-sm-2">S'inscrire</button>
+</form>
+
+                            </div>
+                            <ul class="list-unstyled feature-list wow fadeInUp" data-wow-delay="0.7s">
+                                
+                            </ul>
+                            <div class="active-user d-flex align-items-center wow fadeInUp" data-wow-delay="0.8s">
+                                <div class="user-img-inner">
+                                   <img src="{{ asset('img2/bank/active-user1.jpg') }}" alt="">
+                                   <img src="{{ asset('img2/bank/active-user2.jpg') }}" alt="">
+                                <img src="{{ asset('img2/bank/active-user3.jpg') }}" alt="">
+
+                                </div>
+                                5K+ ⭐ Active users
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="bank-card-img">
+                            <div class="bank-card wow fadeInUp" data-wow-delay="0.8s">
+                                <img data-parallax='{"x": 0, "y": 90}' src="{{asset('img2/bank/card-3.png')}}" alt="">
+                            </div>
+                            <div class="bank-card wow fadeInUp" data-wow-delay="0.5s">
+                                <img data-parallax='{"x": 0, "y": 50}' src="{{asset('img2/bank/card-2.png')}}" alt="">
+                            </div>
+                            <div class="bank-card wow fadeInUp" data-wow-delay="0.3s">
+                                <img src="{{asset('img2/bank/card-1.png')}}" alt="">
+                            </div>
+                            <img class="shap one" src="{{asset('img2/bank/line.png')}}" alt="">
+                            <img data-parallax='{"x": 0, "y": 50, "rotateZ": 305}' class="shap two"
+                                src="{{asset('img2/bank/Star-2.png')}}" alt="">
+                            <img data-parallax='{"x": 0, "y": 0, "rotateZ": 305}' class="shap three"
+                                src="{{asset('img2/bank/Star-3.png')}}" alt="">
+                            <img data-parallax='{"x":20, "y": 0, "rotateZ": 305}' class="shap four"
+                                src="{{asset('img2/bank/Star-4.png')}}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- banner section end-->
+
+        <!-- bank fact start-->
+        <section class="bank-fact-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                        <div class="fact-item wow fadeInUp">
+                            <div class="icon">
+                                <img src="{{asset('img2/bank/single-icon.png')}}" alt="">
+                            </div>
+                            <h3>Options de paiement diversifiées </h3>
+                            <p>Mettre en avant la disponibilité d'un service client réactif, disponible par chat en direct, par téléphone ou par e-mail pour répondre aux questions et résoudre les problèmes des clients.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="fact-item wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="icon">
+                                <img src="{{asset('img2/bank/world-icon.png')}}" alt="">
+                            </div>
+                            <h3>Services de Banque Internationale</h3>
+                            <p>offrir des services financiers aux clients internationaux, y compris les transferts de fonds internationaux, les comptes multi-devises, les prêts pour les entreprises opérant à l'échelle mondiale</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="fact-item wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="icon">
+                                <img src="{{asset('img2/bank/sheld-icon.png')}}" alt="">
+                            </div>
+                            <h3>Sécurité renforcée</h3>
+                            <p> Mettre en avant les mesures de sécurité avancées mises en place pour protéger les informations financières des clients lors des transactions en ligne.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- bank fact end-->
+        <!-- bank process end-->
+        <section class="process-area bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="section-title bank-section-title text-start">
+                            <span class="short-title-2 wow fadeInUp">NOTRE PROCESSUS</span>
+                            <h1 class="wow fadeInUp">Obtenez un prêt en 4 <span class="underline-shape">étapes simples</span>
+                            </h1>
+                            <p class="wow fadeInUp" data-wow-delay="0.3s">Grâce à notre processus simple en 4 étapes, obtenir un prêt devient une expérience fluide et sans tracas. Nous sommes là pour vous accompagner à chaque étape du processus et vous offrir le soutien dont vous avez besoin pour atteindre vos objectifs financiers.</p>
+                            <a class="read-more wow fadeInUp" data-wow-delay="0.3s" href="#">Learn more about it <i
+                                    class="arrow_right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 ps-lg-5">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="feature-card-widget-8 saas-feature-card wow fadeInUp" data-wow-delay="0.1s">
+                                    <h2 class="number">01</h2>
+                                    <h4>Soumission de la Demande en Ligne</h4>
+                                    <p>Commencez par remplir notre formulaire de demande en ligne. Nous avons simplifié le processus pour qu'il soit rapide et facile à remplir. Vous n'avez qu'à fournir les informations de base nécessaires pour évaluer votre admissibilité.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="feature-card-widget-8 saas-feature-card wow fadeInUp" data-wow-delay="0.3s">
+                                    <h2 class="number">02</h2>
+                                    <h4> Évaluation de la Demande</h4>
+                                    <p>Une fois que vous avez soumis votre demande, notre équipe d'experts procède à une évaluation minutieuse. Nous examinons votre profil financier, votre historique de crédit et d'autres facteurs pertinents pour déterminer votre admissibilité et le montant du prêt auquel vous pouvez accéder.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="feature-card-widget-8 saas-feature-card wow fadeInUp" data-wow-delay="0.6s">
+                                    <h2 class="number">03</h2>
+                                    <h4>Approbation Rapide</h4>
+                                    <p>Nous comprenons que le temps est essentiel, c'est pourquoi nous nous efforçons d'offrir une réponse rapide. Une fois votre demande évaluée, nous vous informons de notre décision dans les plus brefs délais. Si votre demande est approuvée, vous recevrez les détails de votre prêt, y compris les modalités de remboursement.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="feature-card-widget-8 saas-feature-card wow fadeInUp" data-wow-delay="0.6s">
+                                    <h2 class="number">04</h2>
+                                    <h4>Décaissement des Fonds</h4>
+                                    <p>Une fois que vous avez accepté les conditions du prêt, nous procédons au décaissement des fonds. Que ce soit pour financer un projet, consolider des dettes ou répondre à des besoins imprévus, nous veillons à ce que les fonds soient rapidement disponibles sur votre compte bancaire, vous permettant ainsi de réaliser vos projets sans délai.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- bank process end-->
+        <!-- bank app showcase  -->
+        <section class="bank-app-showcase-area bg-white">
+            <div class="container">
+                <div class="row align-items-center flex-row-reverse">
+                    <div class="col-lg-6 offset-lg-1">
+                        <div class="app-content">
+                            <div class="section-title bank-section-title text-start">
+                                <span class="short-title-2 wow fadeInUp">Notre site Web </span>
+                                <h1 class="wow fadeInUp">Tous vos  <span class="underline-shape">finances</span>
+                                    dans un seul site web.
+                                </h1>
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <img class="wow fadeInUp" data-wow-delay="0.4s" src="{{asset('img2/bank/mobile.png')}}" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- bank app showcase  -->
+
+        <!-- bank card area  -->
+       <section class="why-choose-area pt-125 pb-135 overflow-hidden">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="section-title">
+                            <h2 class="wow fadeInUp">Pourquoi Nous?</h2>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-55 gy-lg-0 gy-4">
+                    <div class="col-lg-4">
+                        <div class="content-box pr-lg-30 pl-lg-30 wow fadeInUp" data-wow-delay="0.1s">
+
+                            <img src="{{asset('img2/card/layout.svg')}}" alt="icon">
+                            <h4 class="mt-30 mb-15">Facile à utiliser</h4>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="content-box pr-lg-30 pl-lg-30 wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="line-shape">
+                                <img class="wow zoomIn" data-wow-delay="0.1s" src="{{asset('img2/card/line-shape.png')}}" alt="shape">
+                            </div>
+                            <img src="{{asset('img2/card/salary.svg')}}" alt="icon">
+                            <h4 class="mt-30 mb-15">Paiements rapides</h4>
+                           
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="content-box pr-lg-30 pl-lg-30 wow fadeInUp" data-wow-delay="0.5s">
+                            <img src="{{asset('img2/card/antivirus.svg')}}" alt="icon">
+                            <h4 class="mt-30 mb-15">100% Securisé</h4>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- bank card area  -->
+        <!-- saas features area  -->
+        <section class="pt-115 pb-105 feature-area-3">
+            <div class="container">
+                <div class="section-title">
+                    <span class="short-title-2">Nos comptes epargnes</span>
+                    <h1 class="wow fadeInUp">Plusieurs types d'epargnes sont a votre disposition avec des taux differents</h1>
+                </div>
+                <div class="row gy-4 mt-50">
+                    <div class="col-xl-3 col-lg-4 col-md-6">
+                        <div class="feature-card-widget-9 wow fadeInUp" data-wow-delay="0.1s">
+                            <img src="{{asset('img2/home-5/feature-icon-1.svg')}}" alt="">
+                            <h5>Compte d'epargne standard</h5>
+                            <p> le taux d'interet pour ce type est de 0.5%</p>
+                        </div>
+                    </div>
+                     <div class="col-xl-3 col-lg-4 col-md-6">
+                        <div class="feature-card-widget-9 wow fadeInUp" data-wow-delay="0.9s">
+                            <img src="{{asset('img2/home-5/feature-icon-5.svg')}}" alt="">
+                            <h5>Compte d'épargne spécialisé</h5>
+                            <p> Ces comptes d'épargne spécialisés, tels que des comptes pour l'achat d'une maison, des comptes pour les vacances ou des comptes pour les dépenses médicales.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-4 col-md-6">
+                        <div class="feature-card-widget-9 wow fadeInUp" data-wow-delay="0.5s">
+                            <img src="{{asset('img2/home-5/feature-icon-3.svg')}}" alt="">
+                            <h5>Compte d'épargne à terme </h5>
+                            <p> Ce type de compte impose une période de blocage spécifique pendant laquelle les fonds doivent rester dans le compte pour gagner des intérêts à un taux fixe.</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-6">
+                        <div class="feature-card-widget-9 wow fadeInUp" data-wow-delay="0.7s">
+                            <img src="{{asset('img2/home-5/feature-icon-4.svg')}}" alt="">
+                            <h5>Compte d'épargne pour la retraite </h5>
+                            <p> Ces comptes sont destinés à aider les individus à épargner pour leur retraite, offrant parfois des avantages fiscaux spéciaux.</p>
+                        </div>
+                    </div>
+                   
+                  
+                    
+                    
+                </div>
+            </div>
+        </section>
+        <!-- saas features card area  -->
+
+        <!-- saas map area  -->
+      
+<section class="articles-area pt-125 pb-140">
+            <div class="container">
+                <div class="section-title d-flex flex-wrap justify-content-between text-start align-items-center">
+ 
+                   <div class="section-title">
+                    <span class="short-title-2">Assurances</span>
+                    <h1 class="wow fadeInUp">Les assurances offertes par notre banque</h1>   
+                </div>                 
+                </div>
+                <div class="row mt-60 gy-4 gy-lg-0">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="blog-widget-1 wow fadeInUp" data-wow-delay="0.1s">
+                            <img class="w-100" src="{{asset('img2/blog/blog-8.png')}}" alt="news image">
+                            <div class="blog-content pr-10 pl-10">
+                                <h6><a href="blog-details.html">Assurance Vie</a></h6>
+                                
+                                <p> Une assurance qui verse un capital ou une rente à un bénéficiaire désigné en cas de décès de l'assuré.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="blog-widget-1 wow fadeInUp" data-wow-delay="0.1s">
+                            <img class="w-100" src="{{asset('img2/blog/blog-1.png')}}" alt="news image">
+                            <div class="blog-content pr-10 pl-10">
+                                <h6><a href="blog-details.html">Assurance habitation</a></h6>
+                                
+                                <p> Une assurance qui couvre les dommages causés à votre maison et à vos biens à l'intérieur .</p>
+                            </div>
+                        </div>
+                    </div>
+                   <div class="col-lg-3 col-md-6">
+                        <div class="blog-widget-1 wow fadeInUp" data-wow-delay="0.1s">
+                            <img class="w-100" src="{{asset('img2/blog/blog-2.png')}}" alt="news image">
+                            <div class="blog-content pr-10 pl-10">
+                                <h6><a href="blog-details.html">Assurance automobile</a></h6>
+                                
+                                <p> Une assurance qui couvre les dommages causés à votre véhicule ainsi que les dommages matériels .</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="blog-widget-1 wow fadeInUp" data-wow-delay="0.1s">
+                            <img class="w-100" src="{{asset('img2/blog/blog-7.png')}}" alt="news image">
+                            <div class="blog-content pr-10 pl-10">
+                                <h6><a href="blog-details.html">Assurance de prêt </a></h6>
+                                
+                                <p> Une assurance qui protège l'emprunteur et la banque en cas de décès, d'invalidité ou de perte d'emploi .</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- saas map area  -->
+
+       
+        <!-- saas-clients-logo start-->
+     <section class="app-showcase-area">
+            <img class="shape_img" src="img2/saas-app/grid-two.png" alt="">
+            <div class="container">
+                <div class="saas-section-title text-center mb-60 wow fadeInUp" data-wow-delay="0.2s">
+                    <h2>Découvrez nos offres   <span>de prêts</span> avantageuses</h2>
+                    <p>Avec des taux compétitifs et une approbation rapide en ligne, nous vous accompagnons à chaque étape de votre parcours financier.</p>
+                </div>
+                <div class="row">
+                    
+                    <div class="col-lg-12">
+                        <div class="app-showcase-item box-three">
+                            <div class="app-text wow fadeInLeft" data-wow-delay="0.2s">
+                                <h3>Estimer votre Credit</h3>
+                                <p>Besoin d'une estimation rapide pour votre crédit ? Notre outil de calcul de crédit en ligne vous offre une solution simple et efficace.</p>
+<a href="{{ path('app_loancalculator') }}" class="wow fadeInUp theme-btn theme-btn-lg theme-btn-alt">Visitez le calculateur de crédit</a>
+                            </div>
+                            <div class="img wow fadeInRight" data-wow-delay="0.4ss">
+                                <img src="{{asset('img2/saas-app/dash_app.png')}}" alt="">
+                                <div class="app_shap_img one"><img data-parallax='{"x": 0, "y": -80}'
+                                        src="{{asset('img2/saas-app/dash_app_small.png')}}" alt=""></div>
+                                <div class="app_shap_img two"><img data-parallax='{"x": 0, "y": 50}'
+                                        src="{{asset('img2/saas-app/dash_app_small2.png')}}" alt=""></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- saas-clients-logo end-->
+        
+        <!-- footer start -->
+        <footer class="footer footer-1">
+		<div class="copyright pt-25 pb-25">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 text-center text-lg-start">
+                        <a href="index.html" class="p-0 m-0"><img src="{{asset('img2/logo/Logo.png')}}" alt="logo"></a>
+                    </div>
+                    <div class="col-lg-5 text-center my-3 my-sm-0">
+                        <div class="copyright-text">
+                            <p>Copyright&copy; E-bank 2024.<br class="d-sm-none"> <a class="ms-2" href="#">Privecy</a> |
+                                <a class="ms-0" href="#">Term of
+                                    Use</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center text-lg-end ">
+                        <div class="social-button">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+	</footer>
+        <!-- footer end -->
+
+        <!-- Back to top button -->
+        <a id="back-to-top" title="Back to Top"></a>
+
+        <!-- JS here -->
+        <script type="text/javascript" src="{{ asset('js2/jquery-3.6.0.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/flatpickr.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/preloader.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/bootstrap.bundle.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/jquery.smoothscroll.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/jquery.parallax-scroll.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/slick.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/jquery.fancybox.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/nouislider.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/wNumb.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/wow.min.js') }}"></script>
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+<script type="text/javascript" src="{{ asset('js2/custom.js') }}"></script>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from html-template.spider-themes.net/banca/index-small-bank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Feb 2024 09:01:57 GMT -->
+</html>

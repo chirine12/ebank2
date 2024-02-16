@@ -1,0 +1,302 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Banca - Banking & Business Loan Bootstrap-5 HTML Template</title>
+    <link rel="shortcut icon" href="{{ asset('img2/favicon.png') }}" type="image/x-icon">
+    <!-- CSS here -->
+    <link rel="stylesheet" type="text/css" href="css2/bootstrap.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css2/elegant-icons.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css2/all.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css2/animate.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css2/slick.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css2/slick-theme.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css2/nice-select.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css2/nouislider.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css2/animate.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css2/jquery.fancybox.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css2/flatpickr.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css2/default.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css2/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css2/responsive.css" media="all" />
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="ctn-preloader" class="ctn-preloader">
+            <div class="round_spinner">
+                <div class="spinner"></div>
+                <div class="text">
+                    <img src="{{asset('img2/logo/Logo-2.png')}}" alt="">
+                </div>
+            </div>
+            <h2 class="head">Quelques secondes</h2>
+            
+        </div>
+    </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-menu header-menu-4" id="sticky">
+            <nav class="navbar navbar-expand-lg ">
+                <div class="container">
+                    <a class="navbar-brand sticky_logo" href="index.html">
+                      <img class="main" src="{{ asset('img2/logo/Logo.png') }}" srcset="{{ asset('img2/logo/Logo@2x.png') }} 2x" alt="logo">
+                      <img class="sticky" src="{{ asset('img2/logo/Logo-2.png') }}" srcset="{{ asset('img2/logo/Logo-2@2x.png') }} 2x" alt="logo">
+
+                    </a>
+                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="menu_toggle">
+                            <span class="hamburger">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </span>
+                            <span class="hamburger-cross">
+                                <span></span>
+                                <span></span>
+                            </span>
+                        </span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav menu ms-auto">
+                            <li class="nav-item dropdown submenu ">
+                                <a href="{{ path('app_landing_page') }}" class="nav-link dropdown-toggle active" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acceuil</a>
+                                <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="true"
+                                    data-bs-toggle="dropdown"></i>
+                                
+                            </li>
+                            <li class="nav-item dropdown submenu">
+                                <a class="nav-link dropdown-toggle" href="{{ path('app_loancalculator') }}" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    loan calculator
+                                </a>
+                                <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="false"
+                                    data-bs-toggle="dropdown"></i>
+
+                                
+                            </li>
+                           
+                            
+                        </ul>
+                        <a class="theme-btn theme-btn-rounded-2 theme-btn-alt"
+                        href="{{ path('app_login') }}">Se connecter</a>
+
+                        <div class="px-2 js-darkmode-btn" title="Toggle dark mode">
+                            <label for="something" class="tab-btn tab-btns">
+                                <ion-icon name="moon"></ion-icon>
+                            </label>
+                            <label for="something" class="tab-btn">
+                                <ion-icon name="sunny"></ion-icon>
+                            </label>
+                            <label class=" ball" for="something"></label>
+                            <input type="checkbox" name="something" id="something" class="dark_mode_switcher">
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- Header end-->
+    <main>
+        <!-- BreadCrumb start -->
+          <section class="breadcrumb-area">
+            <div class="breadcrumb-widget  pt-200 pb-110" style="background-image: url(img2/breadcrumb/bg-1.png);">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="breadcrumb-content pt-85">
+                                <h1>Calculateur de crédit</h1>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<section class="calculator-area-three">
+            <div class="container">
+                <div class="section-title bank-section-title mb-80">
+                    <span class="short-title-2">Calculateur de credit</span>
+                    <h1 class="wow fadeInUp"><span class="underline-shape">Calculer </span> votre credit<br>
+                        & Obtenez les details du  prêt.
+                    </h1>
+                </div>
+
+                <div class="calculator-widget-2 mt-50">
+                    <div class="row  gy-lg-0 gy-3">
+                        <div class="col-lg-7">
+                            <div class="single-calculator-widget wow fadeInUp" data-wow-delay="0.1s">
+                                <h4>Calculateur de credit</h4>
+                                <div class="range-label mt-40">Terme de credit</div>
+                                <nav>
+                                    <div class="nav nav-tabs loan-type-select" id="nav-tab" role="tablist">
+                                        <button class="nav-link active" id="yearTab-tab" data-bs-toggle="tab"
+                                            data-bs-target="#yearTab" type="button" role="tab" aria-controls="yearTab"
+                                            aria-selected="false">Annuel
+                                        </button>
+                                        <button class="nav-link " id="monthTab-tab" data-bs-toggle="tab"
+                                            data-bs-target="#monthTab" type="button" role="tab" aria-controls="monthTab"
+                                            aria-selected="false">Mensuel</button>
+                                        <button class="nav-link" id="weekTab-tab" data-bs-toggle="tab"
+                                            data-bs-target="#weekTab" type="button" role="tab" aria-controls="weekTab"
+                                            aria-selected="false">Hebdomadaire </button>
+                                    </div>
+                                </nav>
+
+                                <div class="range-label">Montant du prêt</div>
+                                <div class="single-range">
+                                    <div id="RangeSlider"></div>
+                                    <div class="input-group">
+                                        <input class="noTextMerge" type="text" id="SetRange">
+                                        <span class="input-group-text">DT</span>
+                                    </div>
+                                </div>
+                                <div class="range-label">Taux d'intérêt</div>
+                                <div class="single-range">
+                                    <div id="RoiRangeSlider"></div>
+                                    <div class="input-group">
+                                        <input type="text" id="SetRoiRange">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                </div>
+                                <div class="range-label">Durée du prêt</div>
+                                <div class="single-range">
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="yearTab" role="tabpanel"
+                                            aria-labelledby="yearTab">
+                                            <div id="YearRangeSlider"></div>
+                                        </div>
+                                        <div class="tab-pane fade " id="monthTab" role="tabpanel"
+                                            aria-labelledby="monthTab">
+                                            <div id="MonthRangeSlider"></div>
+                                        </div>
+                                        <div class="tab-pane fade" id="weekTab" role="tabpanel"
+                                            aria-labelledby="weekTab">
+                                            <div id="WeekRangeSlider"></div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <input class="noTextMerge" type="text" id="SetMonthRange">
+                                        <span class="input-group-text loanTermIndicator">@example.com</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex loan-start-date">
+                                    <div>
+                                        <div class="range-label">Date de début</div>
+                                        <div class="inp-container">
+                                            <input type="text" id="loanStartDate" placeholder="selectionner date">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="range-label">Date de fin</div>
+                                        <div class="inp-container">
+                                            <input type="text" id="loanEndDate" placeholder="selectionner date">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5 pl-lg-35">
+                            <div class="calculator-result-widget wow fadeInUp" data-wow-delay="0.3s">
+                                <div class="pie-wrapper mt-25" id="loan_graph_circle">
+                                    <div class="label">Montant total<h2 class="LoanTotalAmount"></h2>
+                                    </div>
+                                    <div class="pie">
+                                        <div class="left-side half-circle"></div>
+                                        <div class="right-side half-circle"></div>
+                                    </div>
+                                    <div class="circle-border"></div>
+                                </div>
+                                <div class="graph-indicator">
+                                    <div><span class="blue-dot"></span> Montant de l'EMI</div>
+                                    <div><span class="orange-dot"></span> Intérêts à payer</div>
+                                </div>
+                                <ul class="loan-calculation list-unstyled">
+                                    <li>
+                                        <span class="label">Montant de l'EMI (Principal + Intérêt)</span>
+                                        <span class="amount LoanTotalAmount"> </span>
+                                    </li>
+                                    <li>
+                                        <span class="label">Intérêts à payer</span>
+                                        <span class="amount" id="InterestPayable"></span>
+                                    </li>
+                                    <li>
+                                        <span class="label">Durée du prêt</span>
+                                        <span class="amount LoanTotalDuration"></span>
+                                    </li>
+                                    <li>
+                                        <span class="label">Votre montant d'EMI</span>
+                                        <span class="amount" id="emiAmount"></span>
+                                    </li>
+                                </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- footer -->
+    <footer class="footer footer-1">
+		<div class="copyright pt-25 pb-25">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 text-center text-lg-start">
+                        <a href="index.html" class="p-0 m-0"><img src="{{asset('img2/logo/Logo.png')}}" alt="logo"></a>
+                    </div>
+                    <div class="col-lg-5 text-center my-3 my-sm-0">
+                        <div class="copyright-text">
+                            <p>Copyright&copy; E-bank 2024.<br class="d-sm-none"> <a class="ms-2" href="#">Privecy</a> |
+                                <a class="ms-0" href="#">Term of
+                                    Use</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center text-lg-end ">
+                        <div class="social-button">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+	</footer>
+    <!-- footer end -->
+
+    <!-- Back to top button -->
+    <a id="back-to-top" title="Back to Top"></a>
+
+    <!-- JS here -->
+    <script type="text/javascript" src="{{ asset('js2/flatpickr.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('js2/jquery-3.6.0.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/preloader.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/bootstrap.bundle.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/jquery.smoothscroll.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/jquery.waypoints.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/jquery.counterup.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/jquery.nice-select.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/wow.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('unpkg.com/ionicons%405.4.0/dist/ionicons.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/nouislider.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/wNumb.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/flatpickr.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js2/custom.js') }}"></script>
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+
+    
+</body>
+</html>

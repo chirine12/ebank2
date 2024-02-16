@@ -239,7 +239,7 @@ class Client
         return $this->virement;
     }
 
-    public function addVirement(virement $virement): static
+    public function addVirement(Virement $virement): static
     {
         if (!$this->virement->contains($virement)) {
             $this->virement->add($virement);
@@ -249,7 +249,7 @@ class Client
         return $this;
     }
 
-    public function removeVirement(virement $virement): static
+    public function removeVirement(Virement $virement): static
     {
         if ($this->virement->removeElement($virement)) {
             // set the owning side to null (unless already changed)
