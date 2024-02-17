@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier compte{% endblock %}
+
+{% block body %}
+    <h1>Modifier votre compte</h1>
+
+    {{ include('Admincompteep/_form.html.twig', {'button_label': 'mettre a jour'}) }}
+
+    <a href="{{ path('Adminapp_compteep_index') }}">Retour a la liste</a>
+
+    {{ include('Admincompteep/_delete_form.html.twig') }}
+{% endblock %}
