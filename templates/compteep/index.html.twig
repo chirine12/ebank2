@@ -3,33 +3,36 @@
 {% block title %}Compteep index{% endblock %}
 
 {% block body %}
-    <h1>Compteep index</h1>
+    <h1>Mes comptes d'epargnes</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                
                 <th>Rib</th>
                 <th>Solde</th>
-                <th>Type</th>
-                <th>Dateouv</th>
                 <th>Description</th>
-                <th>actions</th>
+                <th>afficher plus de details</th>
+                <th>Modifier</th>
             </tr>
         </thead>
         <tbody>
         {% for compteep in compteeps %}
             <tr>
-                <td>{{ compteep.id }}</td>
+             
                 <td>{{ compteep.Rib }}</td>
                 <td>{{ compteep.solde }}</td>
-                <td>{{ compteep.type }}</td>
-                <td>{{ compteep.dateouv ? compteep.dateouv|date('Y-m-d') : '' }}</td>
+                
                 <td>{{ compteep.description }}</td>
                 <td>
-                    <a href="{{ path('app_compteep_show', {'id': compteep.id}) }}">show</a>
-                    <a href="{{ path('app_compteep_edit', {'id': compteep.id}) }}">edit</a>
+                  <button onclick="window.location.href='{{ path('app_compteep_show', {'id': compteep.id}) }}'" class="btn tp-btn-light btn-primary">Plus</button>
+
+                 
                 </td>
+<td> 
+                  <button onclick="window.location.href='{{ path('app_compteep_edit', {'id': compteep.id}) }}'" class="btn tp-btn-light btn-primary">Modifier</button>
+
+                   </td>
             </tr>
         {% else %}
             <tr>
@@ -39,5 +42,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_compteep_new') }}">Create new</a>
+   <button onclick="window.location.href='{{ path('app_compteep_new') }}'" class="btn tp-btn-light btn-primary">Ajouter un compte</button>
+
 {% endblock %}

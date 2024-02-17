@@ -1,4 +1,15 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+    {# Champ 'type' avec label en dessous #}
+    {{ form_row(form.type) }}
+
+    {# Champ 'description' avec label en dessous #}
+    {{ form_row(form.description) }}
+
+    {# Champ 'rib' avec label en dessous #}
+    {{ form_row(form.rib) }}
+
+    
+    <button class="btn btn-info">{{ button_label|default('Enregistrer') }}</button>
+
 {{ form_end(form) }}

@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\CompteepRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: CompteepRepository::class)]
 class Compteep
@@ -27,7 +29,19 @@ class Compteep
     private ?\DateTimeInterface $dateouv = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Description ne doit pas etre vide')]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'Description doit avoir au min{ limit }} caractheres',
+        maxMessage: 'Description ne doit pas avir plus que  {{ limit }} caractheres'
+    )]
+    #[Assert\Regex(
+        pattern: '/^[A-Za-z]+$/',
+        message: 'Description doit avoir seulement des lettres'
+    )]
     private ?string $description = null;
+
 
     #[ORM\ManyToOne(inversedBy: 'compteep')]
     private ?Client $client = null;

@@ -17,16 +17,46 @@ class CompteepController extends AbstractController
     #[Route('/', name: 'app_compteep_index', methods: ['GET'])]
     public function index(CompteepRepository $compteepRepository): Response
     {
+        // Récupérer l'utilisateur actuellement connecté
+        $user = $this->getUser();
+
+        // Récupérer l'entité Client associée à l'utilisateur
+        $client = $user->getClient();
+
+        // Vérifier si l'utilisateur a un client associé
+        if (!$client) {
+            throw $this->createAccessDeniedException('No client associated with the user.');
+        }
+
+        // Récupérer les comptes épargne associés au client
+        $compteeps = $compteepRepository->findBy(['client' => $client]);
+
         return $this->render('compteep/index.html.twig', [
-            'compteeps' => $compteepRepository->findAll(),
+            'compteeps' => $compteeps,
         ]);
     }
+    
 
     #[Route('/new', name: 'app_compteep_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    {      $user = $this->getUser();
+
+        // Récupérer l'entité Client associée à l'utilisateur
+        $client = $user->getClient();
         $compteep = new Compteep();
-        $form = $this->createForm(CompteepType::class, $compteep);
+
+       $compteep->setSolde(0);
+       $compteep->setClient($client);
+       $compteep->setDateOuv(new \DateTime());
+        
+        
+        do {
+            $Rib = mt_rand(10000000000, 99999999999);
+        } while ($this->isRibUnique($Rib, $entityManager));
+    
+        $compteep->setRib($Rib);
+
+        $form = $this->createForm(CompteEpType::class, $compteep);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -36,10 +66,18 @@ class CompteepController extends AbstractController
             return $this->redirectToRoute('app_compteep_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('compteep/new.html.twig', [
+        return $this->render('compteep/new.html.twig', [
             'compteep' => $compteep,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
+    }
+
+    private function isRibUnique($Rib, EntityManagerInterface $entityManager): bool
+    {
+        // Check if the rib already exists in the database
+        $existingCompteEp = $entityManager->getRepository(Compteep::class)->findOneBy(['Rib' => $Rib]);
+    
+        return $existingCompteEp !== null;
     }
 
     #[Route('/{id}', name: 'app_compteep_show', methods: ['GET'])]
@@ -49,11 +87,11 @@ class CompteepController extends AbstractController
             'compteep' => $compteep,
         ]);
     }
-
     #[Route('/{id}/edit', name: 'app_compteep_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Compteep $compteep, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(CompteepType::class, $compteep);
+        $form = $this->createForm(CompteepType::class, $compteep, ['is_edit' => true]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
