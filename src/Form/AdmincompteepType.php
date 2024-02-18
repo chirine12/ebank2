@@ -34,7 +34,7 @@ class AdmincompteepType extends AbstractType
         // Replace ChoiceType for 'client' with EntityType to handle entity relationship
         $builder->add('client', EntityType::class, [
             'class' => Client::class,
-            'disabled' => true,
+            'disabled' => $options['is_edit'],
             'choice_label' => 'id', // Or any other property you wish to display
             'placeholder' => 'Choose a client',
             'attr' => [
