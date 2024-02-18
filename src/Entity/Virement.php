@@ -30,10 +30,10 @@ class Virement
     #[ORM\Column(length: 255)]
     #[Assert\Length(
         min: 5,
-        minMessage: "Le motif doit contenir au moins {{ 5 }} caractères",
+        minMessage: "Le motif doit contenir au moins 5  caractères",
         // Vous pouvez aussi spécifier une longueur max si nécessaire
         max: 255,
-        maxMessage: "Le motif ne peut pas être plus long que {{ 255 }} caractères"
+        maxMessage: "Le motif ne peut pas être plus long que  255  caractères"
     )]
     private ?string $motif = null;
 
@@ -41,6 +41,10 @@ class Virement
     private ?Client $client = null;
 
     #[ORM\Column]
+    
+    #[Assert\Positive(
+        message: "Le montant doit être positif."
+    )]
     private ?float $montant = null;
 
     public function getId(): ?int
