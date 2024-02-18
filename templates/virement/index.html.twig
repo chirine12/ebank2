@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Virement index{% endblock %}
+{% block title %} Liste des virements{% endblock %}
 
 {% block body %}
-    <h1>Virement index</h1>
+    <h1>Liste des virements</h1>
 
     <table class="table">
         <thead>
@@ -11,20 +11,24 @@
                 <th>Id</th>
                 <th>Source</th>
                 <th>Destinataire</th>
+                <th>Montant</th>
                 <th>Motif</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for virement in virements %}
             <tr>
                 <td>{{ virement.id }}</td>
-                <td>{{ virement.source }}</td>
+                 <td>{{ virement.source }}</td>
                 <td>{{ virement.destinataire }}</td>
+                <td>{{ virement.montant }}</td>
                 <td>{{ virement.motif }}</td>
+                
+                
                 <td>
-                    <a href="{{ path('app_virement_show', {'id': virement.id}) }}">show</a>
-                    <a href="{{ path('app_virement_edit', {'id': virement.id}) }}">edit</a>
+                    <a href="{{ path('app_virement_show', {'id': virement.id}) }}">Voir</a>
+                   <!-- <a href="{{ path('app_virement_edit', {'id': virement.id}) }}">edit</a> -->
                 </td>
             </tr>
         {% else %}
@@ -35,5 +39,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_virement_new') }}">Create new</a>
+    <a href="{{ path('app_virement_new') }}">effectuer un virement</a>
 {% endblock %}

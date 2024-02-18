@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Beneficiaire index{% endblock %}
+{% block title %}Liste des beneficiaires{% endblock %}
 
 {% block body %}
     <h1>Beneficiaire index</h1>
@@ -23,8 +23,16 @@
                 <td>{{ beneficiaire.prenom }}</td>
                 <td>{{ beneficiaire.Rib }}</td>
                 <td>
-                    <a href="{{ path('app_beneficiaire_show', {'id': beneficiaire.id}) }}">show</a>
-                    <a href="{{ path('app_beneficiaire_edit', {'id': beneficiaire.id}) }}">edit</a>
+                    <div class="mb-3">
+        <!-- Bouton Show -->
+        <a href="{{ path('app_beneficiaire_show', {'id': beneficiaire.id}) }}" class="btn btn-info">Show</a>
+        
+        <!-- Bouton Edit -->
+        <a href="{{ path('app_beneficiaire_edit', {'id': beneficiaire.id}) }}" class="btn btn-primary">Edit</a>
+        
+        <!-- Bouton Virement -->
+        <a href="{{ path('app_virement_new', {'beneficiaireId': beneficiaire.id}) }}" class="btn btn-success">Virement</a>
+    </div>
                 </td>
             </tr>
         {% else %}

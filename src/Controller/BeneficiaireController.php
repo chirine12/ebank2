@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Beneficiaire;
 use App\Form\BeneficiaireType;
 use App\Repository\BeneficiaireRepository;
+use App\Repository\ClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +16,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class BeneficiaireController extends AbstractController
 {
     #[Route('/', name: 'app_beneficiaire_index', methods: ['GET'])]
-    public function index(BeneficiaireRepository $beneficiaireRepository): Response
-    {
+    public function index(BeneficiaireRepository $beneficiaireRepository, ClientRepository $clientRepository): Response
+    { $user = $this->getUser();
+        $client = $clientRepository->findOneBy(['user' => $user]);
+        if (!$client) {
+            throw $this->createNotFoundException('Le client associé à l\'utilisateur connecté n\'existe pas.');
+        }
+    
+        $beneficiaires = $beneficiaireRepository->findBy(['client' => $client]);
         return $this->render('beneficiaire/index.html.twig', [
-            'beneficiaires' => $beneficiaireRepository->findAll(),
+            'beneficiaires' => $beneficiaires,
+            'client' => $client,
         ]);
     }
 
@@ -26,6 +34,11 @@ class BeneficiaireController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $beneficiaire = new Beneficiaire();
+        $user = $this->getUser();
+
+        // Récupérer l'entité Client associée à l'utilisateur
+        $client = $user->getClient(); 
+         $beneficiaire->setClient($client);
         $form = $this->createForm(BeneficiaireType::class, $beneficiaire);
         $form->handleRequest($request);
 

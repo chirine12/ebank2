@@ -65,6 +65,9 @@ class Client
     #[ORM\OneToMany(targetEntity: Contrat::class, mappedBy: 'client')]
     private Collection $contrat;
 
+    #[ORM\OneToMany(targetEntity: Beneficiaire::class, mappedBy: 'client')]
+    private Collection $benef;
+
     public function __construct()
     {
         $this->compteep = new ArrayCollection();
@@ -72,6 +75,7 @@ class Client
         $this->assurance = new ArrayCollection();
         $this->credit = new ArrayCollection();
         $this->contrat = new ArrayCollection();
+        $this->benef = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -345,6 +349,36 @@ class Client
             // set the owning side to null (unless already changed)
             if ($contrat->getClient() === $this) {
                 $contrat->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, beneficiaire>
+     */
+    public function getBenef(): Collection
+    {
+        return $this->benef;
+    }
+
+    public function addBenef(beneficiaire $benef): static
+    {
+        if (!$this->benef->contains($benef)) {
+            $this->benef->add($benef);
+            $benef->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBenef(beneficiaire $benef): static
+    {
+        if ($this->benef->removeElement($benef)) {
+            // set the owning side to null (unless already changed)
+            if ($benef->getClient() === $this) {
+                $benef->setClient(null);
             }
         }
 
