@@ -14,6 +14,7 @@
                 <th>Description</th>
                 <th>afficher plus de details</th>
                 <th>Modifier</th>
+                <th>desactiver</th>
             </tr>
         </thead>
         <tbody>
@@ -31,6 +32,12 @@
                 </td>
 <td> 
                   <button onclick="window.location.href='{{ path('app_compteep_edit', {'id': compteep.id}) }}'" class="btn tp-btn-light btn-primary">Modifier</button>
+
+                   </td>
+
+                   
+                   <td> 
+                  <button onclick="window.location.href='{{ path('Adminapp_compteep_delete', {'id': compteep.id}) }}'" class="btn tp-btn-light btn-primary">Desactiver</button>
 
                    </td>
             </tr>

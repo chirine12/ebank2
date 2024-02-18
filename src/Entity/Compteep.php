@@ -23,7 +23,8 @@ class Compteep
     private ?float $solde = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $type = null;
+#[Assert\NotNull(message: 'Vous devez choisir un type')]
+private ?string $type = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateouv = null;
@@ -44,6 +45,7 @@ private ?string $description = null;
 
 
     #[ORM\ManyToOne(inversedBy: 'compteep')]
+    #[Assert\NotNull(message: 'Vous devez choisir un client ')]
     private ?Client $client = null;
 
     public function getId(): ?int

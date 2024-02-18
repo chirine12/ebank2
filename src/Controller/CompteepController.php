@@ -34,6 +34,7 @@ class CompteepController extends AbstractController
         return $this->render('compteep/index.html.twig', [
             'compteeps' => $compteeps,
         ]);
+        
     }
     
 
