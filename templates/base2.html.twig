@@ -32,13 +32,7 @@
     <!--*******************
         Preloader start
     ********************-->
-    <div id="preloader">
-        <div class="inner">
-            <span>Loading </span>
-            <div class="loading">  
-            </div>
-        </div>
-    </div>
+  
     <!--*******************
         Preloader end
     ********************-->
@@ -802,7 +796,7 @@
 									<img src="{{asset('images/placeholder.jpg')}}" alt="">
 									<div class="d-flex align-items-center sidebar-info">
 										<div class="user-info">
-											<span class="font-w500 d-block  fs-5 text-white">Adam Joe</span>
+											<span class="font-w500 d-block  fs-5 text-white">hello {{app.user.username}}</span>
 											<small class="text-end font-w400">Admin</small>
 										</div>
 										<svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -870,6 +864,7 @@
 							<li><a href="{{ path('Adminapp_compteep_index') }}">Compte d'épargne</a></li>
 
                             <li><a href="{{ path('app_typetaux_index') }}">Types d'épargne</a></li>
+							<li><a href="{{ path('app_admin_accept_index') }}">Voir les demandes de desactivation</a></li>
 
 						</ul>
 					</li>

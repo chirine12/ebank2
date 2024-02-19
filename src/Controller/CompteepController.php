@@ -15,27 +15,27 @@ use Symfony\Component\Routing\Annotation\Route;
 class CompteepController extends AbstractController
 {
     #[Route('/', name: 'app_compteep_index', methods: ['GET'])]
-    public function index(CompteepRepository $compteepRepository): Response
-    {
-        // Récupérer l'utilisateur actuellement connecté
-        $user = $this->getUser();
+public function index(CompteepRepository $compteepRepository): Response
+{
+    // Récupérer l'utilisateur actuellement connecté
+    $user = $this->getUser();
 
-        // Récupérer l'entité Client associée à l'utilisateur
-        $client = $user->getClient();
+    // Récupérer l'entité Client associée à l'utilisateur
+    $client = $user->getClient();
 
-        // Vérifier si l'utilisateur a un client associé
-        if (!$client) {
-            throw $this->createAccessDeniedException('No client associated with the user.');
-        }
-
-        // Récupérer les comptes épargne associés au client
-        $compteeps = $compteepRepository->findBy(['client' => $client]);
-
-        return $this->render('compteep/index.html.twig', [
-            'compteeps' => $compteeps,
-        ]);
-        
+    // Vérifier si l'utilisateur a un client associé
+    if (!$client) {
+        throw $this->createAccessDeniedException('No client associated with the user.');
     }
+
+    // Récupérer les comptes épargne associés au client
+    $compteeps = $compteepRepository->findBy(['client' => $client, 'etat' => true]); // Ajouter la condition pour les comptes actifs
+
+    return $this->render('compteep/index.html.twig', [
+        'compteeps' => $compteeps,
+    ]);
+}
+
     
 
     #[Route('/new', name: 'app_compteep_new', methods: ['GET', 'POST'])]
@@ -47,6 +47,7 @@ class CompteepController extends AbstractController
         $compteep = new Compteep();
 
        $compteep->setSolde(0);
+       $compteep->setEtat(1);
        $compteep->setClient($client);
        $compteep->setDateOuv(new \DateTime());
         

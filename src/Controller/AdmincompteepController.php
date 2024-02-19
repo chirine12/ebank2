@@ -37,7 +37,7 @@ class AdmincompteepController extends AbstractController
         $compteep = new Compteep();
 
        $compteep->setSolde(0);
-       
+       $compteep->setEtat(1);
        $compteep->setDateOuv(new \DateTime());
         
         
@@ -100,13 +100,16 @@ class AdmincompteepController extends AbstractController
     }
 
     #[Route('/{id}', name: 'Adminapp_compteep_delete', methods: ['POST'])]
-    public function delete(Request $request, Compteep $compteep, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$compteep->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($compteep);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('Adminapp_compteep_index', [], Response::HTTP_SEE_OTHER);
+public function delete(Request $request, Compteep $compteep, EntityManagerInterface $entityManager): Response
+{
+    if ($this->isCsrfTokenValid('delete'.$compteep->getId(), $request->request->get('_token'))) {
+        // Au lieu de supprimer, mettez à jour l'état du compte
+        $compteep->setEtat(false); // "false" pour inactif, ajustez si nécessaire
+        $entityManager->persist($compteep);
+        $entityManager->flush();
     }
+
+    return $this->redirectToRoute('Adminapp_compteep_index', [], Response::HTTP_SEE_OTHER);
+}
+
 }

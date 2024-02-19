@@ -1,0 +1,36 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}DemandeDesacCE index{% endblock %}
+
+{% block body %}
+    <h1>DemandeDesacCE index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Raison</th>
+                <th>ID du compte</th>
+                <th>ID du client</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for demande_desac_c_e in demande_desac_c_es %}
+                <tr>
+                 <td>{{ demande_desac_c_e.id}}</td>
+                    <td>{{ demande_desac_c_e.raison }}</td>
+                    <td>{{ demande_desac_c_e.compteep.id }}</td>
+                    <td>{{ demande_desac_c_e.client.id }}</td>
+                    <td>
+                     <a href="{{ path('app_admin_accept', {'id': demande_desac_c_e.id}) }}" class="btn btn-success">Accepter</a>
+
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

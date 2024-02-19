@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CompteepRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -47,6 +49,17 @@ private ?string $description = null;
     #[ORM\ManyToOne(inversedBy: 'compteep')]
     #[Assert\NotNull(message: 'Vous devez choisir un client ')]
     private ?Client $client = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $etat = null;
+
+    #[ORM\OneToMany(targetEntity: DemandeDesacCE::class, mappedBy: 'compteep')]
+    private Collection $demandeDesacCEs;
+
+    public function __construct()
+    {
+        $this->demandeDesacCEs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -121,6 +134,48 @@ private ?string $description = null;
     public function setClient(?Client $client): static
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function isEtat(): ?bool
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?bool $etat): static
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DemandeDesacCE>
+     */
+    public function getDemandeDesacCEs(): Collection
+    {
+        return $this->demandeDesacCEs;
+    }
+
+    public function addDemandeDesacCE(DemandeDesacCE $demandeDesacCE): static
+    {
+        if (!$this->demandeDesacCEs->contains($demandeDesacCE)) {
+            $this->demandeDesacCEs->add($demandeDesacCE);
+            $demandeDesacCE->setCompteep($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemandeDesacCE(DemandeDesacCE $demandeDesacCE): static
+    {
+        if ($this->demandeDesacCEs->removeElement($demandeDesacCE)) {
+            // set the owning side to null (unless already changed)
+            if ($demandeDesacCE->getCompteep() === $this) {
+                $demandeDesacCE->setCompteep(null);
+            }
+        }
 
         return $this;
     }

@@ -14,7 +14,9 @@
                 <th>Rib</th>
                 <th>Solde</th>
                 <th>Description</th>
-                <th>afficher plus de details</th>
+                
+                   <th>etat du compte</th>
+                   <th>afficher plus de details</th>
                 <th>Modifier</th>
                 <th>desactiver</th>
             </tr>
@@ -28,12 +30,14 @@
                 <td>{{ compteep.solde }}</td>
                 
                 <td>{{ compteep.description }}</td>
+                 <td>{{ compteep.etat ? 'Actif' : 'Inactif' }}</td>
                 
                 <td>
                   <button onclick="window.location.href='{{ path('Adminapp_compteep_show', {'id': compteep.id}) }}'" class="btn tp-btn-light btn-primary">Plus</button>
 
                  
                 </td>
+                
 <td> 
                   <button onclick="window.location.href='{{ path('Adminapp_compteep_edit', {'id': compteep.id}) }}'" class="btn tp-btn-light btn-primary">Modifier</button>
 
@@ -43,7 +47,7 @@
 
 
                    <td> 
-                  <button onclick="window.location.href='{{ path('Adminapp_compteep_delete', {'id': compteep.id}) }}'" class="btn tp-btn-light btn-primary">Suppimer</button>
+                  <button onclick="window.location.href='{{ path('Adminapp_compteep_delete', {'id': compteep.id}) }}'" class="btn tp-btn-light btn-primary">Desactiver</button>
 
                    </td>
             </tr>
