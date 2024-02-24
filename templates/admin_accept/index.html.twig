@@ -1,16 +1,18 @@
 {% extends 'base2.html.twig' %}
 
-{% block title %}DemandeDesacCE index{% endblock %}
+{% block title %}Demandes Desactivation des comptes epargnes {% endblock %}
 
 {% block body %}
-    <h1>DemandeDesacCE index</h1>
+    <h1>Demandes Desacactivation des comptes epargnes</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Raison</th>
+                <th>ID demande</th>
                 <th>ID du compte</th>
+                <th>Raison</th>
                 <th>ID du client</th>
+                <th>Action</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -25,6 +27,9 @@
                      <a href="{{ path('app_admin_accept', {'id': demande_desac_c_e.id}) }}" class="btn btn-success">Accepter</a>
 
                     </td>
+                    <td>
+                    <a href="{{ path('app_admin_refuse', {'id': demande_desac_c_e.id}) }}"  class="btn btn-danger">Refuser</a>
+                      </td>
                 </tr>
             {% else %}
                 <tr>

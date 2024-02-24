@@ -64,4 +64,26 @@ public function accept(
     return $this->redirectToRoute('app_admin_accept_index');
 }
 
+
+#[Route('/admin/refuse/{id}', name: 'app_admin_refuse', methods: ['GET'])]
+public function refuse(
+    DemandeDesacCERepository $demandeDesacCERepository,
+    EntityManagerInterface $entityManager,
+    $id
+): RedirectResponse {
+    $demande = $demandeDesacCERepository->find($id);
+
+    if (!$demande) {
+        $this->addFlash('danger', 'Demande non trouvée.');
+        return $this->redirectToRoute('app_admin_accept_index');
+    }
+
+    // Supprimer la demande sans désactiver le compte
+    $entityManager->remove($demande);
+    $entityManager->flush();
+
+    $this->addFlash('success', 'Demande refusée et supprimé.');
+    return $this->redirectToRoute('app_admin_accept_index');
+}
+
 }
