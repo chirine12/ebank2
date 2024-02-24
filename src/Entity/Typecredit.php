@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TypecreditRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TypecreditRepository::class)]
 class Typecredit
@@ -13,9 +14,12 @@ class Typecredit
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Type("alpha", message: "Le champ ne doit contenir que des lettres")]
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column]
     private ?float $taux = null;
 

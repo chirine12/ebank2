@@ -1,0 +1,15 @@
+ {{ form_start(form ,{'attr': {'novalidate': 'novalidate'}}) }}
+       
+        {# Champ 'type' avec label en dessous #}
+        {{ form_row(form.type) }}
+        {{ form_row(form.montant) }}
+        {{ form_row(form.payement) }}
+        {{ form_row(form.duree) }}
+        {{ form_row(form.datedeb,{
+                        label:"Date du Début du Credit"
+                    }) }}
+        {{ form_row(form.datefin,{
+                        label:"Date de la fin du Credit"
+                    }) }}
+        <button type="submit" class="btn btn-primary btn-lg my-3">submit</button>
+    {{ form_end(form) }}

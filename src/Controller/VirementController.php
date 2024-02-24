@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Virement;
+use App\Entity\User;
 use App\Form\VirementType;
 use App\Repository\VirementRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
+
 
 #[Route('/virement')]
 class VirementController extends AbstractController
@@ -78,4 +81,28 @@ class VirementController extends AbstractController
 
         return $this->redirectToRoute('app_virement_index', [], Response::HTTP_SEE_OTHER);
     }
+    #[Route('/virement', name: 'app')]
+    public function effectuerVirement(): Response
+{
+    $user = $this->getUser();
+    if (!$user) {
+        return $this->redirectToRoute('login_route'); // Assurez-vous que l'utilisateur est connecté
+    }
+
+    $client = $user->getClient(); // Récupérer le client associé à l'utilisateur
+    if (!$client) {
+        // Gérer le cas où le client n'existe pas
+    }
+
+    $compteCourant = $client->getCompteCourant(); // Récupérer le compte courant du client
+    if (!$compteCourant) {
+        // Gérer le cas où le compte courant n'existe pas
+    }
+
+    $rib = $compteCourant->getRib(); // Récupérer le RIB du compte courant
+
+    // Ici, vous pouvez passer le RIB à votre formulaire ou effectuer d'autres actions nécessaires
+    // Par exemple, en le pré-remplissant dans un champ de formulaire
+}
+
 }

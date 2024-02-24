@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block title %}Votre Credit{% endblock %}
+
+
+{% block body %}
+
+
+    <h1>Credit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ credit.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ credit.type }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ credit.montant }}</td>
+            </tr>
+            <tr>
+                <th>Payement</th>
+                <td>{{ credit.payement }}</td>
+            </tr>
+            <tr>
+                <th>Duree</th>
+                <td>{{ credit.duree }}</td>
+            </tr>
+            <tr>
+                <th>Datedeb</th>
+                <td>{{ credit.datedeb ? credit.datedeb|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Datefin</th>
+                <td>{{ credit.datefin ? credit.datefin|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+     <button onclick="window.location.href='{{ path('app_credit_index') }}'" class="btn btn-primary">back to list</button>
+ <button onclick="window.location.href='{{ path('app_credit_edit',{'id': credit.id}) }}'" class="btn btn-primary">edit</button>
+
+   {{ include('credit/_delete_form.html.twig') }}
+
+{% endblock %}

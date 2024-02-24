@@ -17,13 +17,13 @@
 	<meta name="format-detection" content="telephone=no">
 	
 	<!-- PAGE TITLE HERE -->
-	<title>Client dashboard</title>
+	<title>Admin dashboard</title>
 	
 	<!-- FAVICONS ICON -->
-	<link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/favicon.png') }}">
+	<link rel="shortcut icon" type="image/png" href="{{ asset('images/favicon.png') }}">
 <link href="{{ asset('assets/vendor/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/vendor/jquery-autocomplete/jquery-ui.css') }}" rel="stylesheet">
-<link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/styleAdmin.css') }}" rel="stylesheet">
 
 	
 </head>
@@ -842,7 +842,7 @@
 			<div class="dlabnav-scroll">
 				
 				<ul class="metismenu" id="menu">
-				<li><a href="{{asset('assets/userinterface')}}" class="" aria-expanded="false">
+				<li><a href="{{asset('assets/admininterface')}}" class="" aria-expanded="false">
 						<div class="menu-icon">
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path opacity="0.4" d="M16.0754 2H19.4614C20.8636 2 21.9999 3.14585 21.9999 4.55996V7.97452C21.9999 9.38864 20.8636 10.5345 19.4614 10.5345H16.0754C14.6731 10.5345 13.5369 9.38864 13.5369 7.97452V4.55996C13.5369 3.14585 14.6731 2 16.0754 2Z" fill="#763ed0"/>
@@ -867,7 +867,9 @@
 						</a>
 						<ul aria-expanded="false">
 							
-							<li><a href="{{ path('app_compteep_index') }}">Compte d'épargne</a></li>
+							<li><a href="">Compte d'épargne</a></li>
+
+                            <li><a href="{{ path('app_typetaux_index') }}">Types d'épargne</a></li>
 
 						</ul>
 					</li>
@@ -922,9 +924,12 @@
 							<span class="nav-text">Crédit Bancaire</span>
 						</a>
 						<ul aria-expanded="false">
-							<li><a href="{{ path('app_credit_new') }}">Ajouter votre Crédit</a></li>
-                            <li><a href="{{ path('app_credit_index') }}">Votre liste de crédits</a></li>
-							</ul>
+							<li><a href="{{ path('app_typecredit_new') }}">Ajouter un type</a></li>
+<li><a href="{{ path('app_typecredit_index') }}">Liste des Types</a></li>
+
+
+						</ul>
+					</li>
 					<li><a href="widget-basic.html" class="" aria-expanded="false">
 						<div class="menu-icon">
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

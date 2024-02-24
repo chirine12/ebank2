@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
 {% block title %}Typecredit{% endblock %}
 
@@ -21,10 +21,7 @@
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('app_typecredit_index') }}">back to list</a>
-
-    <a href="{{ path('app_typecredit_edit', {'id': typecredit.id}) }}">edit</a>
-
-    {{ include('typecredit/_delete_form.html.twig') }}
+     <button onclick="window.location.href='{{ path('app_typecredit_index') }}'" class="btn btn-primary">back to list</button>
+     <button onclick="window.location.href='{{ path('app_typecredit_edit', {'id': typecredit.id}) }}" class="btn btn-primary">edit</button>
+ {{ include('typecredit/_delete_form.html.twig') }}
 {% endblock %}

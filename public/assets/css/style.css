@@ -303,7 +303,11 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     scroll-behavior: smooth; } }
 
 body {
+  height: 100%;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
@@ -9560,10 +9564,10 @@ svg.pulse-svg {
         .header-right .notification_dropdown .nav-link i {
           font-size: 1.125rem; } }
     .header-right .notification_dropdown .nav-link svg {
-      /* @include respond('phone') {
+       @include respond('phone') {
 					width:1.75rem;	
 					height:1.75rem;
-				}*/ }
+				} }
       @media only screen and (max-width: 87.5rem) {
         .header-right .notification_dropdown .nav-link svg {
           width: 1.75rem;

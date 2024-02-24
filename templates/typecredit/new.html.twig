@@ -1,11 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
-{% block title %}New Typecredit{% endblock %}
+{% block title %} ajouter un nouveau type de crédit{% endblock %}
 
 {% block body %}
-    <h1>Create new Typecredit</h1>
+    <h1>Ajouter un nouveau type</h1>
 
     {{ include('typecredit/_form.html.twig') }}
 
-    <a href="{{ path('app_typecredit_index') }}">back to list</a>
+    <a href="{{ path('app_typecredit_index') }}">Retour a la liste</a>
 {% endblock %}

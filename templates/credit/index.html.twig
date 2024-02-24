@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset ( '../assets/css/style.css')}}">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+       
+</head>
+{% endblock %}
+
+
+
+{% block body %}
+
+
+
+    <h1>Liste de Credit</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Montant</th>
+                <th>Payement</th>
+                <th>Duree</th>
+                <th>Datedeb</th>
+                <th>Datefin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for credit in credits %}
+            <tr>
+                <td>{{ credit.id }}</td>
+                <td>{{ credit.type }}</td>
+                <td>{{ credit.montant }}</td>
+                <td>{{ credit.payement }}</td>
+                <td>{{ credit.duree }}</td>
+                <td>{{ credit.datedeb ? credit.datedeb|date('Y-m-d') : '' }}</td>
+                <td>{{ credit.datefin ? credit.datefin|date('Y-m-d') : '' }}</td>
+                <td>
+                    {#<a href="{{ path('app_credit_show', {'id': credit.id}) }}">show</a>#}
+                    <button onclick="window.location.href='{{ path('app_credit_show', {'id': credit.id}) }}'" class="btn btn-primary">show</button>
+                    <button onclick="window.location.href='{{ path('app_credit_edit', {'id': credit.id}) }}'" class="btn btn-primary">edit</button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   {# <a href="{{ path('app_credit_new') }}">Create new</a>#}
+
+<button onclick="window.location.href='{{ path('app_credit_new') }}'" class="btn btn-primary">Create new</button>
+
+     
+{% endblock %}

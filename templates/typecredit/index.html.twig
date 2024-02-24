@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
 {% block title %}Typecredit index{% endblock %}
 
@@ -21,8 +21,9 @@
                 <td>{{ typecredit.nom }}</td>
                 <td>{{ typecredit.taux }}</td>
                 <td>
-                    <a href="{{ path('app_typecredit_show', {'id': typecredit.id}) }}">show</a>
-                    <a href="{{ path('app_typecredit_edit', {'id': typecredit.id}) }}">edit</a>
+                <button onclick="window.location.href='{{ path('app_typecredit_show', {'id': typecredit.id}) }}'" class="btn btn-primary">Show</button>
+                   <button onclick="window.location.href='{{ path('app_typecredit_edit', {'id': typecredit.id}) }}'" class="btn btn-primary">edit</button>
+                   
                 </td>
             </tr>
         {% else %}
@@ -32,6 +33,6 @@
         {% endfor %}
         </tbody>
     </table>
+<button onclick="window.location.href='{{ path('app_typecredit_new') }}'" class="btn btn-primary">Create new</button>
 
-    <a href="{{ path('app_typecredit_new') }}">Create new</a>
 {% endblock %}
