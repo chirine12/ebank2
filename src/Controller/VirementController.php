@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Beneficiaire;
+use App\Entity\Comptecourant;
 use App\Entity\Virement;
 
 use App\Form\VirementType;
@@ -86,17 +87,36 @@ if ($beneficiaireId) {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $compteSource = $client->getCompteCourant();
+    $compteDestinataire = $entityManager->getRepository(Comptecourant::class)->findOneBy(['Rib' => $virement->getDestinataire()]);
+    
+    if ($compteSource->getSolde() >= $virement->getMontant()) {
+        // Mise à jour des soldes
+        $compteSource->setSolde($compteSource->getSolde() - $virement->getMontant());
+        $compteDestinataire->setSolde($compteDestinataire->getSolde() + $virement->getMontant());
+
+        $entityManager->persist($compteSource);
+        $entityManager->persist($compteDestinataire);
+
             $entityManager->persist($virement);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_virement_index', [], Response::HTTP_SEE_OTHER);
         }
+        else {
+            // Gérer le cas où le solde est insuffisant
+            $soldeInsuffisantErreur = 'Solde insuffisant pour effectuer le virement.';
+        
+        }
 
-        return $this->render('virement/new.html.twig', [
-            'virement' => $virement,
-            'form' => $form->createView(),
-        ]);
+       
     }
+    return $this->render('virement/new.html.twig', [
+        'virement' => $virement,
+        'form' => $form->createView(),
+        'soldeInsuffisantErreur' => $soldeInsuffisantErreur,
+    ]);
+}
 
     #[Route('/{id}', name: 'app_virement_show', methods: ['GET'])]
     public function show(Virement $virement): Response
