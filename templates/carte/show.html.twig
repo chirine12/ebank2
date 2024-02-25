@@ -1,38 +1,64 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
 {% block title %}Carte{% endblock %}
 
 {% block body %}
-    <h1>Carte</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ carte.id }}</td>
-            </tr>
-            <tr>
-                <th>Num</th>
-                <td>{{ carte.num }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ carte.nom }}</td>
-            </tr>
-            <tr>
-                <th>Dateexp</th>
-                <td>{{ carte.dateexp ? carte.dateexp|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Cvv</th>
-                <td>{{ carte.cvv }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_carte_index') }}">back to list</a>
-
-    <a href="{{ path('app_carte_edit', {'id': carte.id}) }}">edit</a>
-
-    {{ include('carte/_delete_form.html.twig') }}
+    <div class="col-xl-9">
+        <div class="card">
+            <div class="card-header d-sm-flex d-block border-0">
+                <div class="me-auto mb-sm-0 mb-4">
+                    <h4 class="fs-18 font-w700">Other Card List</h4>
+                    <span class="fs-12">Lorem ipsum dolor sit amet, consectetur</span>
+                </div>
+                <div class="add-btn me-2">
+                    <a href="{{ path('app_carte_new') }}" class="btn btn-primary">Add Card</a>
+                </div>
+                <select class="default-select dashboard-select">
+                    <option data-display="newest">newest</option>
+                    <option value="1">newest</option>
+                    <option value="2">oldest</option>
+                </select>
+            </div>
+            <div class="card-body pb-0 pt-2">
+                
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center card-type">
+                        <div class="d-flex py-2 align-items-center">
+                            <img src="images/card/card.png" alt="" class="rounded me-3 card-list-img" width="130">
+                            <div class="me-3">
+                                <p class="fs-14 mb-1">Expiration</p>
+                                <span class="font-w500 fs-16">{{ carte.dateexp|date('Y-m-d') }}</span>
+                            </div>
+                        </div>
+                        <div class="me-3">
+                            <p class="fs-14 mb-1">CVV</p>
+                            <span class="font-w500 fs-16">{{ carte.cvv }}</span>
+                        </div>
+                        <div class="me-3">
+                            <p class="fs-14 mb-1">Card Number</p>
+                            <span class="font-w500 fs-16">**** **** **** {{ carte.num|slice(-4) }}</span>
+                        </div>
+                        <div class="me-3">
+                            <p class="fs-14 mb-1">Name in Card</p>
+                            <span class="font-w500 fs-16">{{ carte.nom }}</span>
+                        </div>
+                        <a href="javascript:void(0);" class="fs-16 font-w500 btn-link me-3 text-end">See Number</a>
+                        <div class="dropdown">
+                            <a href="javascript:void(0);" class="btn-link btn sharp tp-btn-light btn-primary pill" data-bs-toggle="dropdown" aria-expanded="false">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.33319 9.99985C8.33319 10.9203 9.07938 11.6665 9.99986 11.6665C10.9203 11.6665 11.6665 10.9203 11.6665 9.99986C11.6665 9.07938 10.9203 8.33319 9.99986 8.33319C9.07938 8.33319 8.33319 9.07938 8.33319 9.99985Z" fill="#B9A8FF"/>
+                                    <path d="M8.33319 3.33329C8.33319 4.25376 9.07938 4.99995 9.99986 4.99995C10.9203 4.99995 11.6665 4.25376 11.6665 3.33329C11.6665 2.41282 10.9203 1.66663 9.99986 1.66663C9.07938 1.66663 8.33319 2.41282 8.33319 3.33329Z" fill="#B9A8FF"/>
+                                    <path d="M8.33319 16.6667C8.33319 17.5871 9.07938 18.3333 9.99986 18.3333C10.9203 18.3333 11.6665 17.5871 11.6665 16.6667C11.6665 15.7462 10.9203 15 9.99986 15C9.07938 15 8.33319 15.7462 8.33319 16.6667Z" fill="#B9A8FF"/>
+                                </svg>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="{{ path('app_carte_delete', {'id': carte.id}) }}">Delete</a>
+                                <a class="dropdown-item" href="{{ path('app_carte_edit', {'id': carte.id}) }}">Edit</a>
+                            </div>
+                        </div>
+                        {{ include('carte/_delete_form.html.twig') }}
+                    </div>
+                
+            </div>
+        </div>
+    </div>
 {% endblock %}

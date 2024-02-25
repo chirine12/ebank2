@@ -24,11 +24,11 @@
                 <td>{{ cheque.num }}</td>
                 <td>{{ cheque.numcompte }}</td>
                 <td>{{ cheque.montant }}</td>
-                <td>{{ cheque.signature }}</td>
+                <td><img src="{{ asset(cheque.signature) }}"></td>
                 <td>{{ cheque.date ? cheque.date|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_cheque_show', {'id': cheque.id}) }}">show</a>
-                    <a href="{{ path('app_cheque_edit', {'id': cheque.id}) }}">edit</a>
+                     <button onclick="window.location.href='{{ path('app_cheque_show', {'id': cheque.id}) }}'" class="btn btn-primary">show</button>
+                    <button onclick="window.location.href='{{ path('app_cheque_edit', {'id': cheque.id}) }}'" class="btn btn-primary">edit</button>
                 </td>
             </tr>
         {% else %}

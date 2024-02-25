@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\ChequeRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,15 +15,20 @@ class Cheque
     private ?int $id = null;
 
     #[ORM\Column(type: Types::BIGINT)]
+    #[Assert\NotBlank(message:"Numero du cheque est necessaire")]
     private ?string $num = null;
 
     #[ORM\Column(type: Types::BIGINT)]
+    #[Assert\NotBlank(message:"Numero du compte est necessaire")]
+    #[Assert\Length(min:11,max:11),]
     private ?string $numcompte = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"Montant est necessaire")]
     private ?float $montant = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"signature est necessaire")]
     private ?string $signature = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]

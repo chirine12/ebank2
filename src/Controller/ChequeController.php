@@ -30,6 +30,11 @@ class ChequeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $uploadedFile = $form['signature']->getData();
+            $newFilename = md5(uniqid()) . '.' . $uploadedFile->guessExtension();
+            $uploadedDirectory = $this->getParameter('kernel.project_dir') . '/public/uploads';
+            $uploadedFile->move($uploadedDirectory,$newFilename);
+            $cheque->setSignature('uploads/' . $newFilename);
             $entityManager->persist($cheque);
             $entityManager->flush();
 

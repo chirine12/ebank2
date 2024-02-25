@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Entity;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\CarteRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Mime\Message;
 
 #[ORM\Entity(repositoryClass: CarteRepository::class)]
 class Carte
@@ -15,15 +16,20 @@ class Carte
     private ?int $id = null;
 
     #[ORM\Column(type: Types::BIGINT)]
+    #[Assert\NotBlank(message:"Num is required")]
+    #[Assert\Length(min:16,max:16),]
     private ?string $num = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Nom is required")]
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateexp = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"cvv is required")]
+    #[Assert\Length(min:3,max:3),]
     private ?int $cvv = null;
 
     public function getId(): ?int

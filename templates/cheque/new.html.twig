@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Create new Cheque</h1>
-
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
     {{ include('cheque/_form.html.twig') }}
 
     <a href="{{ path('app_cheque_index') }}">back to list</a>
