@@ -82,6 +82,13 @@ class Client
     {
         return $this->id;
     }
+    public function setid(int $userId): self
+{
+    $this->id = $userId;
+
+    return $this;
+}
+
 
     public function getNom(): ?string
     {

@@ -18,3 +18,12 @@ images:
     defaults:
         path: '%kernel.project_dir%/public/images'
         permanent: true
+# config/routes.yaml
+app_client_show:
+    path: /client/{id}
+    controller: App\Controller\ClientController::show
+    methods: ['GET']
+app_client_edit:
+    path: '/client/{id}/edit'
+    controller: 'App\Controller\ClientController::edit'
+    methods: ['GET', 'POST']

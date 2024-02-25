@@ -20,8 +20,6 @@ class ClientType extends AbstractType
             ->add('email')
             ->add('tel')
             ->add('datenaissance')
-            ->add('comptecourant')
-            ->add('user')
         ;
     }
 

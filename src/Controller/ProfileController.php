@@ -2,12 +2,20 @@
 
 namespace App\Controller;
 
+use App\Repository\ClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProfileController extends AbstractController
 {
+    private $clientRepository;
+
+    public function __construct(ClientRepository $clientRepository)
+    {
+        $this->clientRepository = $clientRepository;
+    }
+
     #[Route('/profileinterface', name: 'app_profile')]
     public function index(): Response
     {
@@ -24,9 +32,13 @@ class ProfileController extends AbstractController
             $role = 'No Role Assigned';
         }
 
-        // Render the template with the user name and role
+        // Fetch clients from the repository
+        $clients = $this->clientRepository->findAll();
+
+        // Render the template with the user name, role, and clients
         return $this->render('profileinterface/index.html.twig', [
             'email' => $userName,
+            'clients' => $clients,
             'role' => $role
         ]);
     }

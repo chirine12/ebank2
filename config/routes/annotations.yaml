@@ -5,3 +5,9 @@ controllers:
 kernel:
     resource: ../../src/Kernel.php
     type: annotation
+
+
+app_compte_edit:
+    path: '/compte/edit/{id}'
+    controller: 'App\Controller\CompteController::edit'
+    methods: ['GET', 'POST']
