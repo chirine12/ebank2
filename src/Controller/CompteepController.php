@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Compteep;
+use App\Entity\Typetaux;
 use App\Form\CompteepType;
 use App\Repository\CompteepRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,42 +40,58 @@ public function index(CompteepRepository $compteepRepository): Response
 
     
 
-    #[Route('/new', name: 'app_compteep_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {      $user = $this->getUser();
+#[Route('/new', name: 'app_compteep_new', methods: ['GET', 'POST'])]
+public function new(Request $request, EntityManagerInterface $entityManager): Response
+{
+    $user = $this->getUser();
+    $client = $user->getClient();
 
-        // Récupérer l'entité Client associée à l'utilisateur
-        $client = $user->getClient();
-        $compteep = new Compteep();
+    $compteep = new Compteep();
+    $compteep->setSolde(0);
+    $compteep->setEtat(1);
+    $compteep->setClient($client);
+    $compteep->setDateOuv(new \DateTime());
 
-       $compteep->setSolde(0);
-       $compteep->setEtat(1);
-       $compteep->setClient($client);
-       $compteep->setDateOuv(new \DateTime());
-        
-        
-        do {
-            $Rib = mt_rand(10000000000, 99999999999);
-        } while ($this->isRibUnique($Rib, $entityManager));
-    
-        $compteep->setRib($Rib);
+    do {
+        $Rib = mt_rand(10000000000, 99999999999);
+    } while ($this->isRibUnique($Rib, $entityManager));
 
-        $form = $this->createForm(CompteEpType::class, $compteep);
-        $form->handleRequest($request);
+    $compteep->setRib($Rib);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($compteep);
-            $entityManager->flush();
+    $form = $this->createForm(CompteEpType::class, $compteep);
+    $form->handleRequest($request);
 
-            return $this->redirectToRoute('app_compteep_index', [], Response::HTTP_SEE_OTHER);
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Récupérer le type choisi par le client
+        $typeChoisi = $compteep->getType();
+
+        // Vérifier si le type choisi est valide en recherchant dans la table Typetaux
+        $typetaux = $entityManager->getRepository(Typetaux::class)->findOneBy(['type' => $typeChoisi]);
+
+        if (!$typetaux) {
+            // Si le Typetaux n'existe pas, ajoutez une erreur au formulaire
+            $form->get('type')->addError(new FormError('Type choisi non valide.'));
+            
+            return $this->render('compteep/new.html.twig', [
+                'compteep' => $compteep,
+                'form' => $form->createView(),
+            ]);
         }
 
-        return $this->render('compteep/new.html.twig', [
-            'compteep' => $compteep,
-            'form' => $form->createView(),
-        ]);
+        // Associer le Typetaux au Compteep
+        $compteep->setTypetaux($typetaux);
+
+        $entityManager->persist($compteep);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_compteep_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    return $this->render('compteep/new.html.twig', [
+        'compteep' => $compteep,
+        'form' => $form->createView(),
+    ]);
+}
     private function isRibUnique($Rib, EntityManagerInterface $entityManager): bool
     {
         // Check if the rib already exists in the database

@@ -56,6 +56,10 @@ private ?string $description = null;
     #[ORM\OneToMany(targetEntity: DemandeDesacCE::class, mappedBy: 'compteep')]
     private Collection $demandeDesacCEs;
 
+    #[ORM\ManyToOne(inversedBy: 'compteeps')]
+private ?Typetaux $typetaux = null; 
+
+
     public function __construct()
     {
         $this->demandeDesacCEs = new ArrayCollection();
@@ -176,6 +180,18 @@ private ?string $description = null;
                 $demandeDesacCE->setCompteep(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTypetaux(): ?Typetaux
+    {
+        return $this->typetaux;
+    }
+
+    public function setTypetaux(?Typetaux $Typetaux): static
+    {
+        $this->typetaux = $Typetaux;
 
         return $this;
     }
