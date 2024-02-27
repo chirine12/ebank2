@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Beneficiaire;
+use App\Entity\Client;
 use App\Entity\Comptecourant;
 use App\Entity\Virement;
-
+use Knp\Snappy\Pdf as SnappyPdf;
 use App\Form\VirementType;
 use App\Repository\BeneficiaireRepository;
 use App\Repository\ClientRepository;
+use App\Repository\ComptecourantRepository;
 use App\Repository\VirementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,6 +18,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 
 #[Route('/virement')]
 class VirementController extends AbstractController
@@ -41,6 +45,7 @@ class VirementController extends AbstractController
     #[Route('/new', name: 'app_virement_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
+        $soldeInsuffisantErreur = null;
         $user = $security->getUser();
 
         if (!$user) {
@@ -69,6 +74,7 @@ class VirementController extends AbstractController
         $virement = new Virement();
         $virement->setSource($rib); // Pré-remplir le champ source avec le RIB du client
         $virement->setClient($client);
+        $virement->setDate(new \DateTime());  // On initialise la
         $beneficiaireId = $request->query->get('beneficiaireId'); // Récupère l'ID du bénéficiaire depuis les paramètres de requête
 
 if ($beneficiaireId) {
@@ -105,9 +111,10 @@ if ($beneficiaireId) {
         }
         else {
             // Gérer le cas où le solde est insuffisant
+
             $soldeInsuffisantErreur = 'Solde insuffisant pour effectuer le virement.';
         
-        }
+     }
 
        
     }
@@ -118,13 +125,16 @@ if ($beneficiaireId) {
     ]);
 }
 
-    #[Route('/{id}', name: 'app_virement_show', methods: ['GET'])]
-    public function show(Virement $virement): Response
-    {
-        return $this->render('virement/show.html.twig', [
-            'virement' => $virement,
-        ]);
-    }
+ 
+#[Route('/{id}', name: 'app_virement_show', methods: ['GET'])]
+public function show(Virement $virement): Response
+{
+    return $this->render('virement/show.html.twig', [
+        'virement' => $virement,
+    ]);
+}
+
+
 
     #[Route('/{id}/edit', name: 'app_virement_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Virement $virement, EntityManagerInterface $entityManager): Response
@@ -154,6 +164,77 @@ if ($beneficiaireId) {
 
         return $this->redirectToRoute('app_virement_index', [], Response::HTTP_SEE_OTHER);
     }
+    #[Route('/list/pdf', name: 'app_virement_list_pdf', methods: ['GET'])]
+public function virementListPdf(VirementRepository $virementRepository, SnappyPdf $snappy, Security $security, ComptecourantRepository $compteCourantRepository): Response
+{
+    // Obtenez l'utilisateur actuellement connecté
+    $user = $security->getUser();
+    if (!$user) {
+        throw $this->createNotFoundException('Utilisateur non trouvé');
+    }
+
+    $client = $user->getClient();
+    if (!$client) {
+        throw $this->createNotFoundException('Client non trouvé pour cet utilisateur');
+    }
+
+    $compteCourant = $client->getComptecourant();
+    if (!$compteCourant) {
+        throw $this->createNotFoundException('Compte courant non trouvé pour ce client');
+    }
+
+    $rib = $compteCourant->getRib();
+    $virements = $virementRepository->findVirementsByClient($rib); // Utilisez la méthode adaptée pour obtenir les virements
+
+    $html = $this->renderView('virement/list_pdf.html.twig', [
+        'virements' => $virements,
+    ]);
+
+    $pdfContent = $snappy->getOutputFromHtml($html);
+
+    return new Response(
+        $pdfContent,
+        200,
+        [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="historique_virements.pdf"'
+        ]
+    );
+}
+
+    // src/Controller/VirementController.php
+
     
     
+        #[Route('/virements/historique', name: 'virements_historique')]
+        public function historique(VirementRepository $virementRepository, ComptecourantRepository $compteCourantRepository, Security $security): Response
+        {
+            // Obtenez l'utilisateur actuellement connecté
+            $user = $security->getUser();
+            if (!$user) {
+                throw $this->createNotFoundException('Utilisateur non trouvé');
+            }
+    
+            $client = $user->getClient();
+            if (!$client) {
+                throw $this->createNotFoundException('Client non trouvé pour cet utilisateur');
+            }
+    
+            $compteCourant = $client->getComptecourant();
+            if (!$compteCourant) {
+                throw $this->createNotFoundException('Compte courant non trouvé pour ce client');
+            }
+    
+            $rib = $compteCourant->getRib();
+            $virements = $virementRepository->findVirementsByClient($rib);
+    
+            return $this->render('virement/historique.html.twig', [
+                'virements' => $virements,
+            ]);
+        
+    }
+
+
+
+
 }

@@ -1,0 +1,44 @@
+{# templates/virement/historique.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique des Virements{% endblock %}
+
+{% block body %}
+<h2>Historique des Virements</h2>
+
+<!-- Bouton pour télécharger l'historique en PDF -->
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Etat</th>
+            <th>Montant</th>
+            <th>Source/Destinataire</th>
+            <th>Motif</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for virement in virements %}
+        <tr>
+            {% if virement.source == app.user.client.comptecourant.rib %}
+            <td>Envoyé</td>
+            <td>{{ virement.montant }} dt</td>
+            <td>{{ virement.destinataire }}</td>
+            <td>{{ virement.motif }}</td>
+            <td>{{ virement.date|date('d/m/Y') }}</td>
+            {% else %}
+            <td>Reçu</td>
+            <td>{{ virement.montant }} dt</td>
+            <td>{{ virement.source }}</td>
+            <td>{{ virement.motif }}</td>
+            <td>{{ virement.date|date('d/m/Y') }}</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ path('app_virement_list_pdf') }}" class="btn btn-primary">Télécharger PDF</a>
+{% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Client;
 use App\Entity\Virement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -45,4 +46,24 @@ class VirementRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+// src/Repository/VirementRepository.php
+
+// Dans VirementRepository.php
+
+// src/Repository/VirementRepository.php
+
+public function findVirementsByClient($clientRib)
+{
+    $qb = $this->createQueryBuilder('v');
+
+    $qb->where('v.source = :rib OR v.destinataire = :rib')
+       ->setParameter('rib', $clientRib)
+       ->orderBy('v.id', 'DESC'); // ou par date, si disponible
+
+    return $qb->getQuery()->getResult();
+}
+
+
+
 }
