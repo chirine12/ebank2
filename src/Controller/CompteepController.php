@@ -9,6 +9,7 @@ use App\Repository\CompteepRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -136,4 +137,8 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
 
         return $this->redirectToRoute('app_compteep_index', [], Response::HTTP_SEE_OTHER);
     }
+
+   
+
+    
 }

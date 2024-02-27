@@ -20,15 +20,14 @@ class CompteepRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Compteep::class);
     }
-    public function searchByCriteria($criteria)
+    public function searchByRib(string $rib)
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.rib LIKE :criteria OR c.description LIKE :criteria OR c.dateouv LIKE :criteria')
-            ->setParameter('criteria', '%' . $criteria . '%')
+            ->andWhere('c.Rib = :Rib')
+            ->setParameter('Rib', $rib)
             ->getQuery()
             ->getResult();
     }
-
 //    /**
 //     * @return Compteep[] Returns an array of Compteep objects
 //     */

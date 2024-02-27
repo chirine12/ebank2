@@ -18,3 +18,7 @@ images:
     defaults:
         path: '%kernel.project_dir%/public/images'
         permanent: true
+# config/routes.yaml
+# config/routes.yaml
+# config/routes.yaml
+

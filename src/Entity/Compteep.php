@@ -36,7 +36,7 @@ private ?string $type = null;
 #[Assert\Length(
     min: 5,
     max: 255,
-    minMessage: 'Description doit avoir au min{ limit }} caractheres',
+    minMessage: 'Description doit avoir au min{ {limit }} caractheres',
     maxMessage: 'Description ne doit pas avir plus que  {{ limit }} caractheres'
 )]
 #[Assert\Regex(
