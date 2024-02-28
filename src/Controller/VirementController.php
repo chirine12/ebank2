@@ -19,6 +19,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mime\Email;
+
 
 
 #[Route('/virement')]
@@ -43,7 +48,7 @@ class VirementController extends AbstractController
     }
 
     #[Route('/new', name: 'app_virement_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, Security $security): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, Security $security, MailerInterface $mailer): Response
     {
         $soldeInsuffisantErreur = null;
         $user = $security->getUser();
@@ -106,6 +111,19 @@ if ($beneficiaireId) {
 
             $entityManager->persist($virement);
             $entityManager->flush();
+            $clientBeneficiaire = $compteDestinataire->getClient();
+            $transport = Transport::fromDsn('smtp://Ebanking.Society@gmail.com:ypbuklkwyqlktqmi@smtp.gmail.com:587');
+            $mailer = new Mailer($transport);
+            if ($clientBeneficiaire) {
+            
+            $email = (new Email())
+    ->from('Ebanking.Society@gmail.com') // Remplacez par votre adresse email
+    ->to($clientBeneficiaire->getEmail()) // Assurez-vous que votre entité Client a une méthode getEmail()
+    ->subject('Confirmation de Virement')
+    ->html("<p>Bonjour, vous avez reçu un virement. Veuillez vérifier votre historique de transactions pour savoir qui vous a transféré de l'argent. </p>");
+
+$mailer->send($email);}
+            
 
             return $this->redirectToRoute('app_virement_index', [], Response::HTTP_SEE_OTHER);
         }

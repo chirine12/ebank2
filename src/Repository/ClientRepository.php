@@ -75,4 +75,14 @@ class ClientRepository extends ServiceEntityRepository
         ;
     }
     */
+  /*  public function findClientsByVirement($virementId)
+{
+    // Exemple de requête, à adapter selon votre modèle de données
+   /* return $this->createQueryBuilder('c')
+        ->join('c.virement', 'v')
+        ->where('v.id = :virementId')
+        ->setParameter('virementId', $virementId)
+        ->getQuery()
+        ->getResult();
+}*/
 }
