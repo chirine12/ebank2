@@ -206,6 +206,7 @@ public function virementListPdf(VirementRepository $virementRepository, SnappyPd
 
     $html = $this->renderView('virement/list_pdf.html.twig', [
         'virements' => $virements,
+        'client' => $client,
     ]);
 
     $pdfContent = $snappy->getOutputFromHtml($html);
