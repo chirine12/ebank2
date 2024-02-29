@@ -6,10 +6,14 @@ use App\Entity\Typetaux;
 use App\Form\TypetauxType;
 use App\Repository\TypetauxRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Snappy\Pdf as SnappyPdf;
 
 #[Route('/typetaux')]
 class TypetauxController extends AbstractController
@@ -78,4 +82,27 @@ class TypetauxController extends AbstractController
 
         return $this->redirectToRoute('app_typetaux_index', [], Response::HTTP_SEE_OTHER);
     }
+    
+    #[Route('/typetaux/pdf', name: 'app_typetaux_list_pdf', methods: ['GET'])]
+    public function typetauxListPdf(TypetauxRepository $typetauxRepository, SnappyPdf   $snappy): Response
+    {
+        $typetauxes = $typetauxRepository->findAll();
+    
+        $html = $this->renderView('typetaux/list_pdf.html.twig', [
+            'typetauxes' => $typetauxes,
+        ]);
+    
+        $pdfContent = $snappy->getOutputFromHtml($html);
+    
+        return new Response(
+            $pdfContent,
+            200,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="liste_typetaux.pdf"'
+            ]
+        );
+    }
+    
+    
 }

@@ -1,0 +1,31 @@
+{# templates/typetaux/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des Typetaux</h1>
+
+    {# Affichez les données de l'entité Typetaux #}
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Taux</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for typetaux in typetauxes %}
+                <tr>
+                    <td>{{ typetaux.id }}</td>
+                    <td>{{ typetaux.type }}</td>
+                    <td>{{ typetaux.taux }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {# Ajoutez un lien ou un bouton pour déclencher le téléchargement Excel #}
+    <a href="{{ path('app_typetaux_download_excel') }}" class="btn btn-primary">Télécharger Excel</a>
+{% endblock %}
