@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Invest index{% endblock %}
+
+{% block body %}
+    <h1>Invest index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Idclient</th>
+                <th>Crypto</th>
+                <th>Action</th>
+                <th>Amount</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for invest in invests %}
+            <tr>
+                <td>{{ invest.id }}</td>
+                <td>{{ invest.idclient }}</td>
+                <td>{{ invest.crypto }}</td>
+                <td>{{ invest.action }}</td>
+                <td>{{ invest.amount }}</td>
+                <td>
+                    <a href="{{ path('app_invest_show', {'id': invest.id}) }}">show</a>
+                    <a href="{{ path('app_invest_edit', {'id': invest.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_invest_new') }}">Create new</a>
+{% endblock %}

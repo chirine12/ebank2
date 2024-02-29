@@ -65,8 +65,8 @@ class Client
     #[ORM\OneToMany(targetEntity: Contrat::class, mappedBy: 'client')]
     private Collection $contrat;
 
-    #[ORM\OneToMany(targetEntity: DemandeDesacCE::class, mappedBy: 'client')]
-    private Collection $demandeDesacCEs;
+    #[ORM\OneToMany(targetEntity: Beneficiaire::class, mappedBy: 'client')]
+    private Collection $benef;
 
     public function __construct()
     {
@@ -75,13 +75,20 @@ class Client
         $this->assurance = new ArrayCollection();
         $this->credit = new ArrayCollection();
         $this->contrat = new ArrayCollection();
-        $this->demandeDesacCEs = new ArrayCollection();
+        $this->benef = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
     }
+    public function setid(int $userId): self
+{
+    $this->id = $userId;
+
+    return $this;
+}
+
 
     public function getNom(): ?string
     {
@@ -356,29 +363,29 @@ class Client
     }
 
     /**
-     * @return Collection<int, DemandeDesacCE>
+     * @return Collection<int, beneficiaire>
      */
-    public function getDemandeDesacCEs(): Collection
+    public function getBenef(): Collection
     {
-        return $this->demandeDesacCEs;
+        return $this->benef;
     }
 
-    public function addDemandeDesacCE(DemandeDesacCE $demandeDesacCE): static
+    public function addBenef(beneficiaire $benef): static
     {
-        if (!$this->demandeDesacCEs->contains($demandeDesacCE)) {
-            $this->demandeDesacCEs->add($demandeDesacCE);
-            $demandeDesacCE->setClient($this);
+        if (!$this->benef->contains($benef)) {
+            $this->benef->add($benef);
+            $benef->setClient($this);
         }
 
         return $this;
     }
 
-    public function removeDemandeDesacCE(DemandeDesacCE $demandeDesacCE): static
+    public function removeBenef(beneficiaire $benef): static
     {
-        if ($this->demandeDesacCEs->removeElement($demandeDesacCE)) {
+        if ($this->benef->removeElement($benef)) {
             // set the owning side to null (unless already changed)
-            if ($demandeDesacCE->getClient() === $this) {
-                $demandeDesacCE->setClient(null);
+            if ($benef->getClient() === $this) {
+                $benef->setClient(null);
             }
         }
 

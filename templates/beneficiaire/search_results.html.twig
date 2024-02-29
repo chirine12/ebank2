@@ -1,0 +1,36 @@
+{# beneficiaire/search_results.html.twig #}
+
+{% if beneficiaires is not empty %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>RIB</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for beneficiaire in beneficiaires %}
+                <tr>
+                    <td>{{ beneficiaire.id }}</td>
+                    <td>{{ beneficiaire.nom }}</td>
+                    <td>{{ beneficiaire.prenom }}</td>
+                    <td>{{ beneficiaire.Rib }}</td>
+                    <td>
+                        <!-- Exemple d'actions -->
+                        <a href="{{ path('app_beneficiaire_show', {'id': beneficiaire.id}) }}" class="btn btn-info">Afficher</a>
+                        <a href="{{ path('app_beneficiaire_edit', {'id': beneficiaire.id}) }}" class="btn btn-primary">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucun bénéficiaire trouvé.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Aucun bénéficiaire trouvé.</p>
+{% endif %}

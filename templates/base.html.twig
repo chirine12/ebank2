@@ -796,8 +796,8 @@
 									<img src="{{asset('images/placeholder.jpg')}}" alt="">
 									<div class="d-flex align-items-center sidebar-info">
 										<div class="user-info">
-											<span class="font-w500 d-block  fs-5 text-white">Adam Joe</span>
-											<small class="text-end font-w400">Admin</small>
+											<span class="font-w500 d-block  fs-5 text-white">{{app.user.name}}</span>
+											
 										</div>
 										<svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M12.8334 1.08331L7.00002 6.91665L1.16669 1.08331" stroke="#FFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -879,12 +879,12 @@
 								</g></g>
 								</svg>	
 						</div>		
-							<span class="nav-text">Virements et paiements</span>
+							<span class="nav-text">Virements </span>
 						</a>
 						<ul aria-expanded="false">
-							<li><a href="chart-flot.html">Surveiller vos transferts </a></li>
-							<li><a href="chart-morris.html">Réclamer un transfert illégal </a></li>
-							<li><a href="chart-morris.html"> Dépôt et retrait </a></li>
+							<li><a href="{{ path('app_virement_index') }}">consulter virements</a></li>
+							<li><a href="{{ path('app_beneficiaire_index') }}">Beneficiaires</a></li>
+							<li><a href="{{ path('virements_historique') }}"> Historique de transaction</a></li>
 
                            
 

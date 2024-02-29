@@ -26,11 +26,22 @@ class Comptecourant
     #[ORM\OneToOne(mappedBy: 'comptecourant', cascade: ['persist', 'remove'])]
     private ?Client $client = null;
 
+
+   
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    public function setId(?int $id): static
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+    
     public function getDateouv(): ?\DateTimeInterface
     {
         return $this->dateouv;

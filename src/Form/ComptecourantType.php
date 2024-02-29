@@ -15,7 +15,7 @@ class ComptecourantType extends AbstractType
             ->add('dateouv')
             ->add('Rib')
             ->add('solde')
-            ->add('client')
+            
         ;
     }
 

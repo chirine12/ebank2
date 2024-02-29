@@ -1,9 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Beneficiaire index{% endblock %}
+{% block title %}Liste des beneficiaires{% endblock %}
 
 {% block body %}
     <h1>Beneficiaire index</h1>
+    <form id="searchByNameForm">
+    <label for="nameSearch">Recherche par Nom :</label>
+    <input type="text" id="nameSearch" name="nameSearch" class="form-control">
+    <button type="button" class="btn btn-info" onclick="searchBenefByName()">Rechercher</button>
+</form>
+<div id="searchResultsByName"></div>
 
     <table class="table">
         <thead>
@@ -12,7 +18,9 @@
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Rib</th>
-                <th>actions</th>
+                <th>plus</th>
+                <th>modifier</th>
+                <th>virement</th>
             </tr>
         </thead>
         <tbody>
@@ -23,8 +31,19 @@
                 <td>{{ beneficiaire.prenom }}</td>
                 <td>{{ beneficiaire.Rib }}</td>
                 <td>
-                    <a href="{{ path('app_beneficiaire_show', {'id': beneficiaire.id}) }}">show</a>
-                    <a href="{{ path('app_beneficiaire_edit', {'id': beneficiaire.id}) }}">edit</a>
+                    <button onclick="window.location.href='{{ path('app_beneficiaire_show', {'id':beneficiaire.id}) }}'" class="btn tp-btn-light btn-primary">Plus</button>
+                </td>
+                      
+                     <td>
+                    <button onclick="window.location.href='{{ path('app_beneficiaire_edit', {'id':beneficiaire.id}) }}'" class="btn tp-btn-light btn-primary">edit</button>
+                </td> 
+                        <!-- Bouton Virement -->
+                       
+                      <td>
+                    <button onclick="window.location.href='{{ path('app_virement_new', {'id':beneficiaire.id}) }}'" class="btn tp-btn-light btn-primary">Faire virement</button>
+                </td>   
+                      
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +54,27 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_beneficiaire_new') }}">Create new</a>
+    <button onclick="window.location.href='{{ path('app_beneficiaire_new') }}'" class="btn tp-btn-light btn-primary">Ajouter beneficiaire</button>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+    function searchBenefByName() {
+        var name = $('#nameSearch').val();
+
+        $.ajax({
+            type: 'POST',
+            url: '{{ path('app_search_benef_by_name') }}',
+            data: { name: name },
+            success: function(data) {
+                // Ici, vous pourriez vouloir mettre à jour votre tableau de bénéficiaires
+                // ou afficher les résultats dans un élément dédié, comme '#searchResultsByName'
+                $('#searchResultsByName').html(data);
+            },
+            error: function(error) {
+                console.log('Erreur lors de la recherche par nom :', error);
+            }
+        });
+    }
+</script>
+    
 {% endblock %}

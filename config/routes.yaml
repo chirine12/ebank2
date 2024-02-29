@@ -22,3 +22,24 @@ images:
 # config/routes.yaml
 # config/routes.yaml
 
+app_client_show:
+    path: /client/{id}
+    controller: App\Controller\ClientController::show
+    methods: ['GET']
+app_client_edit:
+    path: '/client/{id}/edit'
+    controller: 'App\Controller\ClientController::edit'
+    methods: ['GET', 'POST']
+# config/routes.yaml
+
+# config/routes.yaml
+decrement-solde:
+    path: /decrement-solde
+    controller: App\Controller\UserinterfaceController::decrementsolde
+    methods: ['POST']
+
+update-solde:
+    path: /update-solde
+    controller: App\Controller\UserinterfaceController::updatesolde
+    methods: ['POST']
+

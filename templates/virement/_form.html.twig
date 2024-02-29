@@ -1,4 +1,42 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+{% if soldeInsuffisantErreur is not empty %}
+<div class="alert alert-danger" role="alert">
+    {{ soldeInsuffisantErreur }}
+</div>
+{% endif %}
+    {# Pour chaque champ, adaptez cette structure : #}
+    <div class="mb-3 row">
+        {{ form_label(form.source, 'Source', {'label_attr': {'class': 'col-lg-4 col-form-label'}}) }}
+        <div class="col-lg-6">
+            {{ form_widget(form.source, {'attr': {'class': 'form-control', 'placeholder': 'Source placeholder...'}}) }}
+            {{ form_errors(form.source) }}
+        </div>
+    </div>
+    <div class="mb-3 row">
+        {{ form_label(form.destinataire, 'Destinataire', {'label_attr': {'class': 'col-lg-4 col-form-label'}}) }}
+        <div class="col-lg-6">
+            {{ form_widget(form.destinataire, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le destinataire...'}}) }}
+            {{ form_errors(form.destinataire) }}
+        </div>
+    </div>
+<div class="mb-3 row">
+        {{ form_label(form.montant, 'Montant', {'label_attr': {'class': 'col-lg-4 col-form-label'}}) }}
+        <div class="col-lg-6">
+            {{ form_widget(form.montant, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le montant...'}}) }}
+            {{ form_errors(form.montant) }}
+        </div>
+    </div>
+    <div class="mb-3 row">
+        {{ form_label(form.motif, 'Motif', {'label_attr': {'class': 'col-lg-4 col-form-label'}}) }}
+        <div class="col-lg-6">
+            {{ form_widget(form.motif, {'attr': {'class': 'form-control', 'placeholder': 'Motif...'}}) }}
+            {{ form_errors(form.motif) }}
+        </div>
+    </div>
+    {# Répétez pour 'destinataire', 'montant', et 'description' #}
+    <div class="mb-3 row">
+        <div class="col-lg-8 ms-auto">
+            <button type="submit" class="btn btn-info">Soumettre</button>
+        </div>
+    </div>
 {{ form_end(form) }}

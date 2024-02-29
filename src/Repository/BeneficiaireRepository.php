@@ -45,4 +45,12 @@ class BeneficiaireRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function findByName(string $name)
+{
+    return $this->createQueryBuilder('b')
+        ->where('b.nom LIKE :nom')
+        ->setParameter('nom', '%' . $name . '%')
+        ->getQuery()
+        ->getResult();
+}
 }

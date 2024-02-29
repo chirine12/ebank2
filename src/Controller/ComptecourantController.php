@@ -25,14 +25,16 @@ class ComptecourantController extends AbstractController
     #[Route('/new', name: 'app_comptecourant_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $comptecourant = new Comptecourant();
+        // Manually set the ID (replace 123 with your desired ID)
+        $comptecourant = (new Comptecourant())->setId($this->getUser()->getId());
+
         $form = $this->createForm(ComptecourantType::class, $comptecourant);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($comptecourant);
             $entityManager->flush();
-
+            
             return $this->redirectToRoute('app_comptecourant_index', [], Response::HTTP_SEE_OTHER);
         }
 
