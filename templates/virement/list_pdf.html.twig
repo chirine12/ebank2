@@ -4,51 +4,71 @@
     <meta charset="UTF-8">
     <title>Liste des virements</title>
     <style>
-        /* Ajoutez ici les styles spécifiques pour le PDF */
+        body, h1, table, th, td {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+        }
+        header {
+            margin-bottom: 20px;
+        }
+        header img {
+            width: 100px; /* Ajustez selon la taille de votre logo */
+            height: auto;
+        }
+        h1 {
+            color: #007bff; /* Bleu */
+            font-size: 24px;
+            margin: 0;
+            padding: 0;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
         th, td {
-            border: 1px solid black;
             padding: 8px;
+            border: 1px solid #ddd; /* Bordure plus douce */
             text-align: left;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #007bff; /* Bleu */
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #ADD8E6;
+        }
+        .text-blue {
+            color:  #000000; /* Bleu */
         }
     </style>
 </head>
 <body>
-    <h1>Historique des virements</h1>
+    <header>
+        <img src="{{ absolute_url(asset('img2/logo/Logo-3.png')) }}" alt="Logo Banque" style="width: 150px; height: auto;">
+        <h1>Liste des virements</h1>
+    </header>
 
     <table>
         <thead>
             <tr>
-               <th>Etat</th>
-               <th>Montant</th>
-               <th>Source/Destinataire</th>
-               <th>Motif</th>
-               <th>Date</th>
+                <th>État</th>
+                <th>Montant</th>
+                <th>Source/Destinataire</th>
+                <th>Motif</th>
+                <th>Date</th>
             </tr>
         </thead>
         <tbody>
         {% if virements|length > 0 %}
             {% for virement in virements %}
                 <tr>
-                    {% if virement.source == app.user.client.comptecourant.rib %}
-                        <td>Envoyé</td>
-                        <td>{{ virement.montant }} dt</td>
-                        <td>{{ virement.destinataire }}</td>
-                        <td>{{ virement.motif }}</td>
-                        <td>{{ virement.date|date('d/m/Y') }}</td>
-                    {% else %}
-                        <td>Reçu</td>
-                        <td>{{ virement.montant }} dt</td>
-                        <td>{{ virement.source }}</td>
-                        <td>{{ virement.motif }}</td>
-                        <td>{{ virement.date|date('d/m/Y') }}</td>
-                    {% endif %}
+                    <td class="{{ virement.source == app.user.client.comptecourant.rib ? 'text-blue' : '' }}">
+                        {{ virement.source == app.user.client.comptecourant.rib ? 'Envoyé' : 'Reçu' }}
+                    </td>
+                    <td>{{ virement.montant }} dt</td>
+                    <td>{{ virement.destinataire ?: virement.source }}</td>
+                    <td>{{ virement.motif }}</td>
+                    <td>{{ virement.date|date('d/m/Y') }}</td>
                 </tr>
             {% endfor %}
         {% else %}
