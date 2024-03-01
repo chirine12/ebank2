@@ -1,0 +1,78 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block body %}
+    {# Output the data for testing purposes #}
+    <div>
+        <h2>Statistique de nombre de comptes epargnes par client</h2>
+        
+    </div>
+
+  <div style="width: 600px; height: 400px;">
+        <canvas id="myChart" width="600" height="400"></canvas>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        var resultats = {{ resultats_json | raw }};
+
+        // Output the data for testing purposes
+        console.log(resultats);
+        // Create arrays for labels and data
+        var labels = [];
+        var data = [];
+
+        // Loop through results to extract labels and data
+        for (var i = 0; i < resultats.length; i++) {
+            labels.push('Client ' + resultats[i].clientId);
+            data.push(resultats[i].nbComptes);
+        }
+
+        // Use Chart.js to create the bar chart
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'nombre de comptes epargnes par client',
+                    data: data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)', // Adjust the alpha value for transparency
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            font: {
+                                weight: 'bold', // Make the x-axis labels bold
+                                color: 'black' // Set the color of x-axis labels
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            font: {
+                                weight: 'bold', // Make the y-axis labels bold
+                                color: 'black' // Set the color of y-axis labels
+                            },
+                             stepSize: 1 
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    <style>
+    #myChart {
+        color: black;
+    }
+</style>
+{% endblock %}

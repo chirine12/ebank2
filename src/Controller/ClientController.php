@@ -54,7 +54,7 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
         $entityManager->persist($account);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_userinterface', [], Response::HTTP_SEE_OTHER);
     }
 
     return $this->renderForm('client/new.html.twig', [
