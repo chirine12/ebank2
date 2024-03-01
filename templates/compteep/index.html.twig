@@ -12,13 +12,12 @@
     <label for="ribSearch">Recherche par RIB :</label>
     <input type="text" id="ribSearch" name="ribSearch" class="form-control input-default mr-2" maxlength="11" pattern="[0-9]+">
     <hr>
-    <button type="button" class="btn btn-info" onclick="searchCompteEp()">Rechercher</button>
 </form>
 
 
     <!-- Ajout du conteneur pour les résultats de la recherche -->
     <div id="searchResults"></div>
-
+<div id="tableContainer">
     <table class="table">
         <thead>
             <tr>
@@ -53,28 +52,45 @@
         {% endfor %}
         </tbody>
     </table>
-
+</div>
     <button onclick="window.location.href='{{ path('app_compteep_new') }}'" class="btn tp-btn-light btn-primary">Ajouter un compte</button>
 
-    
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Variable pour stocker le contenu initial
+        var initialTableContent = $('#tableContainer').html();
+
+        $('#ribSearch').on('input', function() {
+            searchCompteEp();
+        });
+
         function searchCompteEp() {
             var rib = $('#ribSearch').val();
 
-            $.ajax({
-                type: 'POST',
-                url: '{{ path('app_search_compteep_by_rib') }}',
-                data: { rib: rib },
-                success: function(data) {
-                    $('#searchResults').html(data);
-                },
-                error: function(error) {
-                    console.log('Erreur lors de la recherche :', error);
-                }
-            });
+            // Si le champ de recherche est vide ou contient uniquement des espaces
+            if (!rib.trim()) {
+                // Réaffiche le contenu initial
+                $('#tableContainer').html(initialTableContent);
+            } else {
+                // Si le champ n'est pas vide, effectue la recherche
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ path('app_search_compteep_by_rib') }}',
+                    data: { rib: rib },
+                    success: function(data) {
+                        $('#tableContainer').html(data);
+                    },
+                    error: function(error) {
+                        console.log('Erreur lors de la recherche :', error);
+                    }
+                });
+            }
         }
-    </script>
+    });
+</script>
+
+
 
 
 {% endblock %}
