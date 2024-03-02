@@ -1,0 +1,11 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+    <h1>Edit User</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.username) }} {# Use the correct field name from your User entity #}
+    {{ form_row(form.email) }}
+    {# Add more form fields as needed #}
+    <button type="submit">Save Changes</button>
+    {{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Password Reset{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Password Reset</h1>
+
+        {% if app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ app.flashes('success')[0] }}
+            </div>
+        {% endif %}
+
+        {% if app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ app.flashes('error')[0] }}
+            </div>
+        {% endif %}
+        {{ form_widget(form._token) }}
+
+        <form method="post" action="{{ path('app_mdpoublier') }}">
+            {{ form_row(form.email, { 'attr': {'class': 'form-control mb-3', 'placeholder': 'Your email'} }) }}
+            {{ form_row(form.submit, { 'attr': {'class': 'btn btn-primary'} }) }}
+        </form>
+    </div>
+{% endblock %}
