@@ -1,0 +1,49 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %} Liste des virements{% endblock %}
+
+{% block body %}
+    <h1>Liste des virements</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Source</th>
+                <th>Cin client</th> 
+                <th>Nom</th>
+                 <th>Prenom</th>
+                <th>Destinataire</th>
+                <th>Montant</th>
+                <th>Motif</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for virement in virements %}
+            <tr>
+                <td>{{ virement.id }}</td>
+                 <td>{{ virement.source }}</td>
+                 <td>{{ virement.client ? virement.client.cin : 'Non specifié' }}</td>
+                  <td>{{ virement.client ? virement.client.nom : 'Admin' }}</td>
+                  <td>{{ virement.client ? virement.client.prenom : 'Admin' }}</td>
+                <td>{{ virement.destinataire }}</td>
+                <td>{{ virement.montant }}</td>
+                <td>{{ virement.motif }}</td>
+                
+                
+                <td>
+                    <a href="{{ path('app_virement_show2', {'id': virement.id}) }}">Voir</a>
+                   <!-- <a href="{{ path('app_virement_edit2', {'id': virement.id}) }}">edit</a> -->
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_virement_new2') }}">effectuer un virement</a>
+{% endblock %}

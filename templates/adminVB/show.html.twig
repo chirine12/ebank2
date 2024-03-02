@@ -1,0 +1,34 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Virement{% endblock %}
+
+{% block body %}
+    <h1>Virement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ virement.id }}</td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>{{ virement.source }}</td>
+            </tr>
+            <tr>
+                <th>Destinataire</th>
+                <td>{{ virement.destinataire }}</td>
+            </tr>
+            <tr>
+                <th>Motif</th>
+                <td>{{ virement.motif }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_virement_index') }}">back to list</a>
+
+    <a href="{{ path('app_virement_edit', {'id': virement.id}) }}">edit</a>
+
+    {{ include('virement/_delete_form.html.twig') }}
+{% endblock %}
