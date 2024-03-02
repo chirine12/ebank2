@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\BeneficiaireRepository;
 use App\Repository\CompteepRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +26,16 @@ public function searchCompteEpByRib(Request  $request, CompteepRepository $compt
 
     return $this->render('compteep/search_results.html.twig', [
         'compteeps' => $compteeps,
+    ]);
+}
+#[Route('/search/beneficiaire/by-name', name: 'app_search_benefeciaire_by_name', methods: ['POST'])]
+public function searchBenfEpByName(Request  $request, BeneficiaireRepository $beneficiaireRepository)
+{
+    $name = $request->request->get('nom');
+    $beneficiares = $beneficiaireRepository->searchByName($name);
+
+    return $this->render('beneficiaire/search_results.html.twig', [
+        'beneficiaires' => $beneficiares,
     ]);
 }
 }

@@ -4,12 +4,12 @@
 
 {% block body %}
     <h1>Beneficiaire index</h1>
-    <form id="searchByNameForm">
-    <label for="nameSearch">Recherche par Nom :</label>
-    <input type="text" id="nameSearch" name="nameSearch" class="form-control">
-    <button type="button" class="btn btn-info" onclick="searchBenefByName()">Rechercher</button>
+   <form id="searchForm">
+    <label for="nameSearch">Recherche par nom :</label>
+    <input type="text" id="nameSearch" name="nameSearch" class="form-control input-default mr-2" maxlength="11" pattern="[0-9]+">
+    <hr>
 </form>
-<div id="searchResultsByName"></div>
+<div id="tableContainer">
 
     <table class="table">
         <thead>
@@ -53,28 +53,42 @@
         {% endfor %}
         </tbody>
     </table>
-
+</div>
     <button onclick="window.location.href='{{ path('app_beneficiaire_new') }}'" class="btn tp-btn-light btn-primary">Ajouter beneficiaire</button>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
+    $(document).ready(function() {
+        // Variable pour stocker le contenu initial
+        var initialTableContent = $('#tableContainer').html();
 
-    function searchBenefByName() {
-        var name = $('#nameSearch').val();
-
-        $.ajax({
-            type: 'POST',
-            url: '{{ path('app_search_benef_by_name') }}',
-            data: { name: name },
-            success: function(data) {
-                // Ici, vous pourriez vouloir mettre à jour votre tableau de bénéficiaires
-                // ou afficher les résultats dans un élément dédié, comme '#searchResultsByName'
-                $('#searchResultsByName').html(data);
-            },
-            error: function(error) {
-                console.log('Erreur lors de la recherche par nom :', error);
-            }
+        $('#nameSearch').on('input', function() {
+            searchname();
         });
-    }
+
+        function searchname() {
+            var name = $('#nameSearch').val();
+
+            // Si le champ de recherche est vide ou contient uniquement des espaces
+            if (!name.trim()) {
+                // Réaffiche le contenu initial
+                $('#tableContainer').html(initialTableContent);
+            } else {
+                // Si le champ n'est pas vide, effectue la recherche
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ path('app_search_benefeciaire_by_name') }}',
+                    data: { nom: name },
+                    success: function(data) {
+                        $('#tableContainer').html(data);
+                    },
+                    error: function(error) {
+                        console.log('Erreur lors de la recherche :', error);
+                    }
+                });
+            }
+        }
+    });
 </script>
+
     
 {% endblock %}

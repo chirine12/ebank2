@@ -91,16 +91,5 @@ class BeneficiaireController extends AbstractController
 
         return $this->redirectToRoute('app_beneficiaire_index', [], Response::HTTP_SEE_OTHER);
     }
-    #[Route('/search/beneficiary/by-name', name:'app_search_benef_by_name', methods:["POST"])]
- 
-public function searchBeneficiaryByName(Request $request, BeneficiaireRepository $beneficiaireRepository): Response
-{
-    $name = $request->request->get('name');
-    $beneficiaires = $beneficiaireRepository->findByName($name);
-
-    // Retourner les résultats sous forme de vue ou JSON
-    return $this->render('beneficiaire/search_results.html.twig', [
-        'beneficiaires' => $beneficiaires,
-    ]);
-}
+    
 }
