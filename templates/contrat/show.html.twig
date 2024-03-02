@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'userinterface/index.html.twig' %}
 
 {% block title %}Contrat{% endblock %}
 
@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <th>Signature</th>
-                <td>{{ contrat.signature }}</td>
+                   <td> <img src="{{ asset('uploads/' ~ contrat.signatureFile) }}" alt="Signature" style="width: 100px; height: auto;"></td>
             </tr>
             <tr>
                 <th>Type</th>

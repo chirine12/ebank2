@@ -1,80 +1,43 @@
-{# templates/compteep/index.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Compteep index{% endblock %}
 
 {% block body %}
-    <h1>Mes comptes d'épargne Actifs</h1>
-
-  
-   <!-- Ajout du formulaire de recherche par RIB -->
-<form id="searchForm">
-    <label for="ribSearch">Recherche par RIB :</label>
-    <input type="text" id="ribSearch" name="ribSearch" class="form-control input-default mr-2" maxlength="11" pattern="[0-9]+">
-    <hr>
-    <button type="button" class="btn btn-info" onclick="searchCompteEp()">Rechercher</button>
-</form>
-
-
-    <!-- Ajout du conteneur pour les résultats de la recherche -->
-    <div id="searchResults"></div>
+    <h1>Compteep index</h1>
 
     <table class="table">
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Rib</th>
                 <th>Solde</th>
+                <th>Type</th>
+                <th>Dateouv</th>
                 <th>Description</th>
-                <th>afficher plus de details</th>
-                <th>Modifier</th>
-                <th>desactiver</th>
+                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for compteep in compteeps %}
             <tr>
+                <td>{{ compteep.id }}</td>
                 <td>{{ compteep.Rib }}</td>
                 <td>{{ compteep.solde }}</td>
+                <td>{{ compteep.type }}</td>
+                <td>{{ compteep.dateouv ? compteep.dateouv|date('Y-m-d') : '' }}</td>
                 <td>{{ compteep.description }}</td>
                 <td>
-                    <button onclick="window.location.href='{{ path('app_compteep_show', {'id': compteep.id}) }}'" class="btn tp-btn-light btn-primary">Plus</button>
-                </td>
-                <td> 
-                    <button onclick="window.location.href='{{ path('app_compteep_edit', {'id': compteep.id}) }}'" class="btn tp-btn-light btn-primary">Modifier</button>
-                </td>
-                <td> 
-                    <button onclick="window.location.href='{{ path('app_demande_desac_c_e_new', {'compteepId': compteep.id}) }}'" class="btn tp-btn-light btn-primary">Desactiver</button>
+                    <a href="{{ path('app_compteep_show', {'id': compteep.id}) }}">show</a>
+                    <a href="{{ path('app_compteep_edit', {'id': compteep.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">Aucun compte trouvé</td>
+                <td colspan="7">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <button onclick="window.location.href='{{ path('app_compteep_new') }}'" class="btn tp-btn-light btn-primary">Ajouter un compte</button>
-
-    
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        function searchCompteEp() {
-            var rib = $('#ribSearch').val();
-
-            $.ajax({
-                type: 'POST',
-                url: '{{ path('app_search_compteep_by_rib') }}',
-                data: { rib: rib },
-                success: function(data) {
-                    $('#searchResults').html(data);
-                },
-                error: function(error) {
-                    console.log('Erreur lors de la recherche :', error);
-                }
-            });
-        }
-    </script>
-
-
+    <a href="{{ path('app_compteep_new') }}">Create new</a>
 {% endblock %}

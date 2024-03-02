@@ -7,21 +7,31 @@ use App\Form\ContratType;
 use App\Repository\ContratRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[Route('/contrat')]
 class ContratController extends AbstractController
 {
-    #[Route('/', name: 'app_contrat_index', methods: ['GET'])]
-    public function index(ContratRepository $contratRepository): Response
+    #[Route('/search', name: 'app_contrat_index', methods: ['GET'])]
+    public function AfficherAction(ContratRepository $contratRepository,Request $request)
     {
-        return $this->render('contrat/index.html.twig', [
+        $search =$request->query->get('searchString');
+        $contrats=$contratRepository->findMulti($search);
+        return $this->render("contrat/index.html.twig",array(
+            'contrats' => $contrats
+        ));
+    }
+    #[Route('/showFront', name: 'app_contrat_index_front', methods: ['GET'])]
+    public function index2(ContratRepository $contratRepository): Response
+    {
+        return $this->render('contrat/index2.html.twig', [
             'contrats' => $contratRepository->findAll(),
         ]);
     }
-
     #[Route('/new', name: 'app_contrat_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -30,6 +40,23 @@ class ContratController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $SignatureFile = $form->get('signatureFile')->getData();
+            if ($SignatureFile) {
+               $originalFilename = pathinfo($SignatureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = $originalFilename.'-'.uniqid().'.'.$SignatureFile->guessExtension();
+
+                try {
+                   $SignatureFile->move(
+                       $this->getParameter('Contrat_directory'), 
+                       $newFilename
+                   );
+                } catch (FileException $e) {
+                    
+                }
+
+               
+               $contrat->setSignatureFile($newFilename);
+            }
             $entityManager->persist($contrat);
             $entityManager->flush();
 

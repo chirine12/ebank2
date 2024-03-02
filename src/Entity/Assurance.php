@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AssuranceRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AssuranceRepository::class)]
 class Assurance
@@ -14,15 +15,18 @@ class Assurance
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Choice(choices: ['habitation', 'automobile', 'vie', 'voyage'], message: 'Choisissez un type d\'assurance valide parmi habitation, automobile, vie, ou voyage.')]
     private ?string $type = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Type(type: 'string', message: 'Le délais doit être une chaîne de caractères.')]
     private ?string $delais = null;
 
-    #[ORM\Column]
-    private ?float $montant = null;
+    #[ORM\Column(type: 'integer')]
+    #[Assert\Positive(message: 'Le montant doit être positif.')]
+    private ?int $montant = null;
 
-    #[ORM\ManyToOne(inversedBy: 'assurance')]
+    #[ORM\ManyToOne(inversedBy: 'assurances')]
     private ?Client $client = null;
 
     public function getId(): ?int

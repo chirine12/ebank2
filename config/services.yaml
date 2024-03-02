@@ -4,9 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-    twilio_account_sid: 'ACf8274d9e2bd87fe4670877052f812508'
-    twilio_auth_token: 'b2e40d854a8115bd87fbc86fe33889bd'
-    twilio_phone_number: '+19514358768'
+    Contrat_directory: '%kernel.project_dir%public/uploads'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -21,17 +19,6 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-    App\Command\CalculInteretCommand:
-        arguments:
-            $entityManager: '@doctrine.orm.entity_manager'
-    # config/services.yaml
-
-    App\Service\SMSService:
-        arguments:
-            $accountSid: '%twilio_account_sid%'
-            $authToken: '%twilio_auth_token%'
-            $twilioPhoneNumber: '%twilio_phone_number%'
-
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

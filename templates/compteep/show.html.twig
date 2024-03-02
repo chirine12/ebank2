@@ -34,9 +34,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_compteep_index') }}">Retour a la liste</a>
-<span style="margin: 0 200px;"></span>
-    <a href="{{ path('app_compteep_edit', {'id': compteep.id}) }}">Modifier</a>
+    <a href="{{ path('app_compteep_index') }}">back to list</a>
+
+    <a href="{{ path('app_compteep_edit', {'id': compteep.id}) }}">edit</a>
 
     {{ include('compteep/_delete_form.html.twig') }}
 {% endblock %}

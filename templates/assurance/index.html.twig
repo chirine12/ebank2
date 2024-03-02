@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'userinterface/index.html.twig' %}
 
-{% block title %}Assurance index{% endblock %}
+{% block title %}Assurance {% endblock %}
 
 {% block body %}
-    <h1>Assurance index</h1>
+    <h1>Assurance </h1>
 
     <table class="table">
         <thead>
@@ -25,6 +25,7 @@
                 <td>
                     <a href="{{ path('app_assurance_show', {'id': assurance.id}) }}">show</a>
                     <a href="{{ path('app_assurance_edit', {'id': assurance.id}) }}">edit</a>
+                    
                 </td>
             </tr>
         {% else %}
@@ -34,6 +35,69 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="create-new-btn">
+        <a href="{{ path('app_assurance_new') }}">Create new</a>
+    </div>
+<style>
+    .create-new-btn {
+    display: block; /* Permet au lien de prendre toute la largeur de son conteneur */
+    width: max-content; /* La largeur s'adapte au contenu */
+    margin: 20px auto; /* Centrer le bouton horizontalement */
+    padding: 10px 20px; /* Espace autour du texte */
+    background-color: red; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    text-align: center;
+    text-decoration: none; /* Supprime le soulignement des liens */
+    border-radius: 5px; /* Bordures arrondies */
+    transition: background-color 0.5s ease; /* Animation de la couleur de fond */
+}
 
-    <a href="{{ path('app_assurance_new') }}">Create new</a>
+.create-new-btn:hover {
+    background-color: darkred; /* Couleur de fond au survol */
+}
+
+    </style>
+    
+  
+    <div class="navigation">
+     {{ knp_pagination_render(assurances) }}
+    </div>
+
+    
+    
+
+
+
+
+     <!-- Bouton Chatbot -->
+
+    <div class="chatbot-button">
+        <a href="{{ path('app_bot') }}">Chatbot</a>
+    </div>
+
+
+    <style>
+    .chatbot-button {
+    position: fixed;
+    right: 20px;
+    bottom: 50px;
+    z-index: 1000;
+}
+
+.chatbot-button a {
+    display: inline-block;
+    background-color: #007bff; /* Couleur bleue, ajustez selon votre palette */
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.chatbot-button a:hover {
+    background-color: #0056b3; /* Couleur lors du survol */
+}
+
+    </style>
 {% endblock %}

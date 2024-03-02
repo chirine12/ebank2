@@ -1,17 +1,19 @@
-{% extends 'base.html.twig' %}
+{% extends 'userinterface/index.html.twig' %}
 
 {% block title %}Contrat index{% endblock %}
 
 {% block body %}
+<input type="search" id="recherche" name="recherche" class="form-control">
     <h1>Contrat index</h1>
 
-    <table class="table">
+    <table class="table" id="tableau">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Datedeb</th>
                 <th>Datefin</th>
                 <th>Signature</th>
+                <th>phone number</th>
                 <th>Type</th>
                 <th>actions</th>
             </tr>
@@ -22,8 +24,11 @@
                 <td>{{ contrat.id }}</td>
                 <td>{{ contrat.datedeb ? contrat.datedeb|date('Y-m-d') : '' }}</td>
                 <td>{{ contrat.datefin ? contrat.datefin|date('Y-m-d') : '' }}</td>
-                <td>{{ contrat.signature }}</td>
+           <td> <img src="{{ asset('uploads/' ~ contrat.signatureFile) }}" alt="Signature" style="width: 100px; height: auto;"></td>    
+                <td>{{contrat.phoneNumber}}</td>
                 <td>{{ contrat.type }}</td>
+                  <td>
+          </td>
                 <td>
                     <a href="{{ path('app_contrat_show', {'id': contrat.id}) }}">show</a>
                     <a href="{{ path('app_contrat_edit', {'id': contrat.id}) }}">edit</a>
@@ -36,6 +41,20 @@
         {% endfor %}
         </tbody>
     </table>
-
     <a href="{{ path('app_contrat_new') }}">Create new</a>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><script >
+    $(function () {
+        $("#recherche").keyup(function () {
+            $.ajax({
+                url : "{{ path('app_contrat_index') }}",
+                data : { 'searchString' : $(this).val() }
+            }).done(function (response) {
+                var tableau = $(response).find("#tableau");
+                console.log(tableau, $('.tableau'));
+                $('#tableau').empty();
+                $('#tableau').append(tableau);
+            });
+        });
+    })
+</script>
 {% endblock %}

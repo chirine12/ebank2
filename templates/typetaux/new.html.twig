@@ -1,11 +1,11 @@
-{% extends 'base2.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block title %} ajouter un nouveau type d'epargne{% endblock %}
+{% block title %}New Typetaux{% endblock %}
 
 {% block body %}
-    <h1>Creer un nouveau type</h1>
+    <h1>Create new Typetaux</h1>
 
     {{ include('typetaux/_form.html.twig') }}
 
-    <a href="{{ path('app_typetaux_index') }}">Retour a la liste</a>
+    <a href="{{ path('app_typetaux_index') }}">back to list</a>
 {% endblock %}

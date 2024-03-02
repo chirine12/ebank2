@@ -65,9 +65,6 @@ class Client
     #[ORM\OneToMany(targetEntity: Contrat::class, mappedBy: 'client')]
     private Collection $contrat;
 
-    #[ORM\OneToMany(targetEntity: DemandeDesacCE::class, mappedBy: 'client')]
-    private Collection $demandeDesacCEs;
-
     public function __construct()
     {
         $this->compteep = new ArrayCollection();
@@ -75,7 +72,6 @@ class Client
         $this->assurance = new ArrayCollection();
         $this->credit = new ArrayCollection();
         $this->contrat = new ArrayCollection();
-        $this->demandeDesacCEs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -349,36 +345,6 @@ class Client
             // set the owning side to null (unless already changed)
             if ($contrat->getClient() === $this) {
                 $contrat->setClient(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, DemandeDesacCE>
-     */
-    public function getDemandeDesacCEs(): Collection
-    {
-        return $this->demandeDesacCEs;
-    }
-
-    public function addDemandeDesacCE(DemandeDesacCE $demandeDesacCE): static
-    {
-        if (!$this->demandeDesacCEs->contains($demandeDesacCE)) {
-            $this->demandeDesacCEs->add($demandeDesacCE);
-            $demandeDesacCE->setClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDemandeDesacCE(DemandeDesacCE $demandeDesacCE): static
-    {
-        if ($this->demandeDesacCEs->removeElement($demandeDesacCE)) {
-            // set the owning side to null (unless already changed)
-            if ($demandeDesacCE->getClient() === $this) {
-                $demandeDesacCE->setClient(null);
             }
         }
 
