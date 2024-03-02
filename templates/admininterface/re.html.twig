@@ -1,0 +1,48 @@
+{% extends 'base2.html.twig' %}
+
+
+{% block title %}Client Data{% endblock %}
+
+
+{% block body %}
+
+
+   <h2>Client Information</h2>
+   <ul>
+       <li>ID: {{ client.id }}</li>
+       <li>Name: {{ client.nom }}</li>
+       <!-- Add other client attributes as needed -->
+   </ul>
+
+
+   <h2>Cartes</h2>
+   <ul>
+       {% for carte in cartes %}
+           <li>
+               ID: {{ carte.id }}, Num: {{ carte.num }}, Date Exp: {{ carte.dateexp ? carte.dateexp|date('Y-m-d') : 'N/A' }}, CVV: {{ carte.cvv }}
+           </li>
+       {% else %}
+           <li>No cartes found</li>
+       {% endfor %}
+   </ul>
+
+
+   <h2>Virements</h2>
+   <ul>
+       {% for virement in virements %}
+           <li>
+               ID: {{ virement.id }}, Amount: {{ virement.amount }}, Date: {{ virement.date ? virement.date|date('Y-m-d') : 'N/A' }}
+           </li>
+       {% else %}
+           <li>No virements found</li>
+       {% endfor %}
+   </ul>
+
+
+   <p>Welcome, {{ user_name }}!</p>
+{% endblock %}
+
+
+
+
+

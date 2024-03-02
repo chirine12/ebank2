@@ -14,7 +14,7 @@ class SecurityController extends AbstractController
     {
         // Check if the user has the 'ROLE_Admin' role
         if ($this->getUser() && $this->getUser()->hasRole('ROLE_Admin')) {
-            return $this->redirectToRoute('admininterface');
+            return $this->redirectToRoute('app_admininterface');
         }
     
         // Handle the case for non-admin users
