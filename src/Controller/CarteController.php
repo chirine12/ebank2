@@ -6,20 +6,31 @@ use App\Entity\Carte;
 use App\Form\CarteType;
 use App\Repository\CarteRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\BodyRenderer;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 #[Route('/carte')]
 class CarteController extends AbstractController
 {
     #[Route('/', name: 'app_carte_index', methods: ['GET'])]
     public function index(CarteRepository $carteRepository): Response
-    {
+    {   $cartes = $this->getDoctrine()->getRepository(Carte::class)->findAll();
+       
+  
         return $this->render('carte/index.html.twig', [
+        
             'cartes' => $carteRepository->findAll(),
         ]);
+        
     }
 
     #[Route('/new', name: 'app_carte_new', methods: ['GET', 'POST'])]
@@ -33,6 +44,27 @@ class CarteController extends AbstractController
             $entityManager->persist($carte);
             $entityManager->flush();
 
+            $transport = Transport::fromDsn('smtp://Ebanking.Society@gmail.com:ypbuklkwyqlktqmi@smtp.gmail.com:587');
+            $mailer = new Mailer($transport);
+            $email = (new TemplatedEmail())
+                ->from('Ebanking.Society@gmail.com')
+                ->to('achrefghliss5@gmail.com')
+                ->subject('Your Card Is Here')
+                ->htmlTemplate('carte/TemplateEmail.html.twig')
+                ->context([
+                    'carte' => $carte,
+                ]);
+                $loader = new FilesystemLoader(__DIR__.'/../../templates');
+    
+                // Create a Twig environment
+                $twigEnv = new Environment($loader);
+                
+                // Create a BodyRenderer with the Twig environment
+                $twigBodyRenderer = new BodyRenderer($twigEnv);
+                
+                // Render the email body
+                $twigBodyRenderer->render($email);
+            $mailer->send($email);
             return $this->redirectToRoute('app_carte_index', [], Response::HTTP_SEE_OTHER);
         }
 

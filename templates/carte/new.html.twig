@@ -1,10 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
 {% block title %}New Carte{% endblock %}
 
 {% block body %}
     <h1>Create new Carte</h1>
-
+ {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
     {{ include('carte/_form.html.twig') }}
 
     <a href="{{ path('app_carte_index') }}">back to list</a>

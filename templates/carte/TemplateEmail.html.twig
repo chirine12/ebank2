@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Bank</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+        }
+        .container {
+            width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        .header {
+            background-color: #264459;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+        .logo {
+            width: 200px;
+            margin: 0 auto;
+            display: block;
+        }
+        .content {
+            padding: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #264459;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .footer {
+            background-color: #efefef;
+            padding: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+         <img src="https://i.imgur.com/e1tzAWy.png" alt="Credit Bank Logo" class="logo">
+        </div>
+        <div class="content">
+            <h1>Welcome to E-Bank!</h1>
+            <p>Dear Client,</p>
+            <p>Congratulations! Your credit card application has been approved. You now have access to the benefits and services offered by Credit Bank.</p>
+            <p>Please save your card informations</p>
+            <p>Your Card Number : {{carte.num}}</p>
+            <p>Your Name:{{carte.nom}}</p>
+            <p>Your Cvv:{{carte.cvv}}</p>
+            <p>Your Expiration date:{{ carte.dateexp|date('Y-m-d') }}</p>
+
+            <p>If you have any questions or need assistance, feel free to contact us at support@creditbank.com.</p>
+            <p>Thank you for choosing E-Bank.</p>
+        </div>
+        <div class="footer">
+            <p>Sent with ❤️ from E-Bank</p>
+        </div>
+    </div>
+</body>
+</html>
