@@ -16,7 +16,8 @@
                 <th>Duree</th>
                 <th>Datedeb</th>
                 <th>Datefin</th>
-                <th>actions</th>
+                <th>afficher</th>
+                <th>modifier</th>
             </tr>
         </thead>
         <tbody>
@@ -31,8 +32,14 @@
                 <td>{{ credit.datefin ? credit.datefin|date('Y-m-d') : '' }}</td>
                 <td>
                     {#<a href="{{ path('app_credit_show', {'id': credit.id}) }}">show</a>#}
-                    <button onclick="window.location.href='{{ path('app_credit_show', {'id': credit.id}) }}'" class="btn btn-primary">show</button>
-                    <button onclick="window.location.href='{{ path('app_credit_edit', {'id': credit.id}) }}'" class="btn btn-primary">edit</button>
+                    <button onclick="window.location.href='{{ path('app_credit_show', {'id': credit.id}) }}'" class="btn tp-btn-light btn-primary">plus</button>
+               
+
+                </td>
+                  <td>
+                    {#<a href="{{ path('app_credit_show', {'id': credit.id}) }}">show</a>#}
+                   
+                    <button onclick="window.location.href='{{ path('app_credit_edit', {'id': credit.id}) }}'" class="btn tp-btn-light btn-primary">modifier</button>
 
                 </td>
             </tr>
@@ -46,9 +53,9 @@
     </table>
 
    {# <a href="{{ path('app_credit_new') }}">Create new</a>#}
-<button onclick="window.location.href='{{ path('app_tricredit') }}'" class="btn btn-primary">trier</button>
-<button onclick="window.location.href='{{ path('app_stat') }}'" class="btn btn-primary">stat</button>
-<button onclick="window.location.href='{{ path('app_credit_new') }}'" class="btn btn-primary">Create new</button>
+<button onclick="window.location.href='{{ path('app_tricredit') }}'" class="btn tp-btn-light btn-primary">trier</button>
+<button onclick="window.location.href='{{ path('app_stat') }}'" class="btn tp-btn-light btn-primary"> voir statistique</button>
+<button onclick="window.location.href='{{ path('app_credit_new') }}'" class="btn tp-btn-light btn-primary">Ajouter credit</button>
 
      
 {% endblock %}

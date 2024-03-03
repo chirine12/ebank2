@@ -1,0 +1,58 @@
+{% block body %}
+    <div class="container">
+        <h1 class="text-center"><center>votre Cheque</center></h1>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <style>
+                        /* Styles personnalisés pour le tableau */
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
+                        th, td {
+                            padding: 5px; /* Réduire l'espacement à 5px */
+                            text-align: center;
+                        }
+                        th {
+                            background-color: #343a40;
+                            color: white;
+                        }
+                        tbody tr:nth-child(even) {
+                            background-color: #f2f2f2;
+                        }
+                    </style>
+                    <table class="table table-bordered table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                
+                                <th scope="col">Num</th>
+                                <th scope="col">RIB</th>
+                                
+                                <th scope="col">Email</th>
+                                <th scope="col">Date</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <td>{{ cheque.num }}</td>
+                                    <td>{{ cheque.numcompte }}</td>
+                                    <td>{{ cheque.mail}}</td>
+                                    <td>{{ cheque.montant}}</td>
+                                    <td>{{ cheque.date|date('Y-m-d') }}</td>
+                                   
+                                      <td>
+                             
+                            </td>
+                                    <td>
+                                        {# Include your code for the État column here if applicable #}
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

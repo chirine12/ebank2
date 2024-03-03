@@ -37,6 +37,10 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+    Knp\Snappy\Pdf:
+        arguments:
+            $binary: '"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe"' # Notez les guillemets supplémentaires autour du chemin
+            $options: []
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -19,14 +19,19 @@
                 <th>Numcompte</th>
                 <td>{{ cheque.numcompte }}</td>
             </tr>
+             <tr>
+                <th>mail</th>
+                <td>{{ cheque.mail }}</td>
+            </tr>
             <tr>
                 <th>Montant</th>
                 <td>{{ cheque.montant }}</td>
             </tr>
-            <tr>
-                <th>Signature</th>
-                <td>{{ cheque.signature }}</td>
-            </tr>
+<tr>
+    <th>Signature</th>
+    <td><img src="{{ asset(cheque.signature) }}" style="width: 40px; height: 40px;"></td>
+</tr>
+
             <tr>
                 <th>Date</th>
                 <td>{{ cheque.date ? cheque.date|date('Y-m-d') : '' }}</td>
@@ -35,8 +40,9 @@
     </table>
 
     <a href="{{ path('app_cheque_index') }}">back to list</a>
+<div> 
 
     <a href="{{ path('app_cheque_edit', {'id': cheque.id}) }}">edit</a>
-
+    <a href="{{ path('app_cheque_pdf', {'id': cheque.id}) }}">pdf</a>
     {{ include('cheque/_delete_form.html.twig') }}
 {% endblock %}

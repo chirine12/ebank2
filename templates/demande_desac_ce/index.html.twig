@@ -22,7 +22,8 @@
             <tr>
                 <th>Raison</th>
                 <th>ID du compte</th>
-                <th>Action</th>
+                <th>modifier</th>
+                <th>supprimer</th>
             </tr>
         </thead>
         <tbody>
@@ -31,7 +32,11 @@
                     <td>{{ demande_desac_c_e.raison }}</td>
                     <td>{{ demande_desac_c_e.compteep.id }}</td>
                     <td>
-                        <a href="{{ path('app_demande_desac_c_e_edit', {'id': demande_desac_c_e.id}) }}" class="btn btn-warning">Modifier</a>
+                        <a href="{{ path('app_demande_desac_c_e_edit', {'id': demande_desac_c_e.id}) }}" class="btn tp-btn-light btn-primary">Modifier</a>
+                       
+                    </td>
+                  <td>
+                        
                         <a href="{{ path('app_demande_desac_c_e_delete', {'id': demande_desac_c_e.id}) }}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?')">Supprimer</a>
                     </td>
                 </tr>

@@ -16,6 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdmininterfaceController extends AbstractController
 {
 
+
+
+
+
+    
 #[Route('/admininterface/{id}', name: 'app_admininterface_id')]
 public function indexById(int $id, ClientRepository $clientRepository): Response
 {
