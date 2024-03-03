@@ -10,18 +10,31 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Joli\JoliNotif\Notification;
+use Joli\JoliNotif\NotifierFactory;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/assurance')]
 class AssuranceController extends AbstractController
 {
     #[Route('/', name: 'app_assurance_index', methods: ['GET'])]
-    public function index(AssuranceRepository $assuranceRepository): Response
-    {
+    public function index(
+        AssuranceRepository $assuranceRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response {
+        $assurance = $assuranceRepository->findAll();
+        $assurance = $paginator->paginate(
+            $assurance,
+            $request->query->getInt('page', 1),
+            2
+        );
         return $this->render('assurance/index.html.twig', [
-            'assurances' => $assuranceRepository->findAll(),
+            'assurances' => $assurance,
         ]);
     }
-
+    
+        
     #[Route('/new', name: 'app_assurance_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -32,9 +45,21 @@ class AssuranceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($assurance);
             $entityManager->flush();
+ // Create a Notifier
+ $notifier = NotifierFactory::create();
 
+ // Create your notification
+ $notification =
+     (new Notification())
+     ->setTitle('Notification title')
+     ->setBody('another assurance has been created')
+ ;
+ 
+ // Send it
+ $notifier->send($notification);
             return $this->redirectToRoute('app_assurance_index', [], Response::HTTP_SEE_OTHER);
         }
+       
 
         return $this->renderForm('assurance/new.html.twig', [
             'assurance' => $assurance,

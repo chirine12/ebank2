@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Demande de Désactivation{% endblock %}
+
+{% block body %}
+    <h1>Nouvelle Demande de Désactivation</h1>
+
+    {# Afficher les messages flash #}
+    {% for flashMessage in app.flashes('danger') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {# Reste du formulaire ici #}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    
+
+    <button class="btn btn-info">{{ button_label|default('Envoyer') }}</button>
+    {{ form_end(form) }}
+{% endblock %}

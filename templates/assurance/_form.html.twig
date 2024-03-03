@@ -1,4 +1,5 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
+      <a href="{{ path('app_assurance_new') }}" class="create-new-btn">Create new</a>
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

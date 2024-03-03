@@ -1,11 +1,36 @@
-{% extends 'base.html.twig' %}
+{% extends 'userinterface/index.html.twig' %}
 
 {% block title %}New Assurance{% endblock %}
-
 {% block body %}
+<style>
+    .back-to-list {
+        display: inline-block; /* Change to 'block' if you want it to be on its own line */
+        margin: 20px auto; /* Centrer le bouton horizontalement sur la page */
+        padding: 10px 20px; /* Espace autour du texte */
+        background-color: red; /* Couleur de fond */
+        color: white; /* Couleur du texte */
+        text-align: center;
+        text-decoration: none; /* Supprime le soulignement des liens */
+        border: none; /* Remove borders */
+        border-radius: 5px; /* Bordures arrondies */
+        transition: background-color 0.5s ease; /* Animation de la couleur de fond */
+        font-size: 16px; /* Taille du texte */
+    }
+
+    .back-to-list:hover {
+        background-color: darkred; /* Couleur de fond au survol */
+    }
+</style>
+
+
+
+
     <h1>Create new Assurance</h1>
-
+    
     {{ include('assurance/_form.html.twig') }}
+    
+    <a href="{{ path('app_assurance_index') }}" class="back-to-list">back to list</a>
 
-    <a href="{{ path('app_assurance_index') }}">back to list</a>
+    <!-- Assurez-vous que tout le contenu supplémentaire est ici, à l'intérieur du même bloc 'body' -->
 {% endblock %}
+

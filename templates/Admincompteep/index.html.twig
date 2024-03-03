@@ -1,0 +1,63 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Compteep index{% endblock %}
+
+{% block body %}
+    <h1>Les comptes d'epargnes dans la banque</h1>
+     <button onclick="window.location.href='{{ path('Adminapp_compteep_new') }}'" class="btn tp-btn-light btn-primary">Ajouter un compte</button>
+
+    <table class="table">
+        <thead>
+            <tr>
+                  <th>Id compte</th>
+                  <th>Id client</th>
+                <th>Rib</th>
+                <th>Solde</th>
+                <th>Description</th>
+                
+                   <th>etat du compte</th>
+                   <th>afficher plus de details</th>
+                <th>Modifier</th>
+                <th>desactiver</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for compteep in compteeps %}
+            <tr>
+             <td>{{ compteep.id}}</td>
+             <td>{{ compteep.client.id }}</td>
+                <td>{{ compteep.Rib }}</td>
+                <td>{{ compteep.solde }}</td>
+                
+                <td>{{ compteep.description }}</td>
+                 <td>{{ compteep.etat ? 'Actif' : 'Inactif' }}</td>
+                
+                <td>
+                  <button onclick="window.location.href='{{ path('Adminapp_compteep_show', {'id': compteep.id}) }}'" class="btn tp-btn-light btn-primary">Plus</button>
+
+                 
+                </td>
+                
+<td> 
+                  <button onclick="window.location.href='{{ path('Adminapp_compteep_edit', {'id': compteep.id}) }}'" class="btn tp-btn-light btn-primary">Modifier</button>
+
+                   </td>
+
+
+
+
+                   <td> 
+                  <button onclick="window.location.href='{{ path('Adminapp_compteep_delete', {'id': compteep.id}) }}'" class="btn tp-btn-light btn-primary">Desactiver</button>
+
+                   </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+    {# Champ 'type' avec label en dessous #}
+    {{ form_row(form.type) }}
+
+    {# Champ 'description' avec label en dessous #}
+    {{ form_row(form.description) }}
+
+    {# Champ 'rib' avec label en dessous #}
+    {{ form_row(form.rib) }}
+
+    {# Champ 'client' (assuming it's a choice field) avec label en dessous #}
+   
+{{ form_row(form.client) }}
+    {# Add rendering for other fields after 'rib' if needed #}
+
+    <button class="btn btn-info">{{ button_label|default('Enregistrer') }}</button>
+
+{{ form_end(form) }}

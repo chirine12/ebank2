@@ -35,6 +35,13 @@ class ContratRepository extends ServiceEntityRepository
 //            ->getResult()
 //        ;
 //    }
+    public function findMulti($find)
+    {
+        $q=$this->createQueryBuilder('m')
+            ->where('m.phoneNumber LIKE :find')
+            ->setParameter(':find',"%$find%");
+        return $q->getQuery()->getResult();
+    }
 
 //    public function findOneBySomeField($value): ?Contrat
 //    {
