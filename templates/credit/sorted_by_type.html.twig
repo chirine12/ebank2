@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crédits Triés par Type{% endblock %}
+
+{% block content %}
+    <h1>Crédits Triés par Type</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Montant</th>
+                <th>Payement</th>
+                <th>Duree</th>
+                <th>Datedeb</th>
+                <th>Datefin</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for credit in credits %}
+                <tr>
+                    <td>{{ credit.id }}</td>
+                    <td>{{ credit.type }}</td>
+                    <td>{{ credit.montant }}</td>
+                    <td>{{ credit.payement }}</td>
+                <td>{{ credit.duree }}</td>
+                <td>{{ credit.datedeb ? credit.datedeb|date('Y-m-d') : '' }}</td>
+                <td>{{ credit.datefin ? credit.datefin|date('Y-m-d') : '' }}</td>
+                 <td>
+                    <button onclick="window.location.href='{{ path('app_credit_show', {'id': credit.id}) }}'" class="btn btn-primary">show</button>
+                    <button onclick="window.location.href='{{ path('app_credit_edit', {'id': credit.id}) }}'" class="btn btn-primary">edit</button>
+
+                </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+<button onclick="window.location.href='{{ path('app_credit_new') }}'" class="btn btn-primary">Create new</button>
+
+{% endblock %}

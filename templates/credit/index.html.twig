@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+
+    <h1>Liste de Credit</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Montant</th>
+                <th>Payement</th>
+                <th>Duree</th>
+                <th>Datedeb</th>
+                <th>Datefin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for credit in credits %}
+            <tr>
+                <td>{{ credit.id }}</td>
+                <td>{{ credit.type }}</td>
+                <td>{{ credit.montant }}</td>
+                <td>{{ credit.payement }}</td>
+                <td>{{ credit.duree }}</td>
+                <td>{{ credit.datedeb ? credit.datedeb|date('Y-m-d') : '' }}</td>
+                <td>{{ credit.datefin ? credit.datefin|date('Y-m-d') : '' }}</td>
+                <td>
+                    {#<a href="{{ path('app_credit_show', {'id': credit.id}) }}">show</a>#}
+                    <button onclick="window.location.href='{{ path('app_credit_show', {'id': credit.id}) }}'" class="btn btn-primary">show</button>
+                    <button onclick="window.location.href='{{ path('app_credit_edit', {'id': credit.id}) }}'" class="btn btn-primary">edit</button>
+
+                </td>
+            </tr>
+
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   {# <a href="{{ path('app_credit_new') }}">Create new</a>#}
+<button onclick="window.location.href='{{ path('app_tricredit') }}'" class="btn btn-primary">trier</button>
+<button onclick="window.location.href='{{ path('app_stat') }}'" class="btn btn-primary">stat</button>
+<button onclick="window.location.href='{{ path('app_credit_new') }}'" class="btn btn-primary">Create new</button>
+
+     
+{% endblock %}

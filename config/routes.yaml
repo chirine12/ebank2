@@ -42,4 +42,61 @@ update-solde:
     path: /update-solde
     controller: App\Controller\UserinterfaceController::updatesolde
     methods: ['POST']
+# config/routes.yaml
 
+app_credit_index:
+    path: /credit/
+    controller: App\Controller\CreditController::index
+    methods: GET
+
+app_credit_new:
+    path: /credit/new
+    controller: App\Controller\CreditController::new
+    methods: [GET, POST]
+
+app_credit_show:
+    path: /credit/{id}
+    controller: App\Controller\CreditController::show
+    methods: GET
+
+app_credit_edit:
+    path: /credit/{id}/edit
+    controller: App\Controller\CreditController::edit
+    methods: [GET, POST]
+
+app_credit_delete:
+    path: /credit/{id}
+    controller: App\Controller\CreditController::delete
+    methods: POST
+# config/routes.yaml
+
+app_typecredit_index:
+    path: /typecredit/
+    controller: App\Controller\TypecreditController::index
+    methods: GET
+
+app_typecredit_new:
+    path: /typecredit/new
+    controller: App\Controller\TypecreditController::new
+    methods: [GET, POST]
+
+app_typecredit_show:
+    path: /typecredit/{id}
+    controller: App\Controller\TypecreditController::show
+    methods: GET
+
+app_typecredit_edit:
+    path: /typecredit/{id}/edit
+    controller: App\Controller\TypecreditController::edit
+    methods: [GET, POST]
+
+app_typecredit_delete:
+    path: /typecredit/{id}
+    controller: App\Controller\TypecreditController::delete
+    methods: POST
+# config/routes.yaml
+
+app_tricredit:
+    path: /tricredit
+    controller: App\Controller\TricreditController::index
+    methods: GET

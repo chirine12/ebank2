@@ -45,4 +45,22 @@ class CreditRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function getStatsByType()
+{
+    $qb = $this->createQueryBuilder('c')
+        ->select('tc.nom as type, count(c) as count')
+        ->leftJoin('c.type', 'tc')
+        ->groupBy('tc.id');
+
+    return $qb->getQuery()->getResult();
+}
+public function findAllSortedByType()
+{
+    return $this->createQueryBuilder('c')
+        ->orderBy('c.type', 'ASC')
+        ->getQuery()
+        ->getResult();
+}
+
+
 }
